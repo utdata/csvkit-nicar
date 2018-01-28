@@ -35,7 +35,11 @@ For those unfamiliar with "the command line", Terminal is an application that us
 
 Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the computer. It'll be ok.
 
-NOTE: If you are reading this in the Markdown file, I'm using text inside of tick marks like `do this` to indicate you are type it into the terminal. DON'T INCLUDE THE TICK MARKS. If viewing on github, the commands are in red type.
+### About commands
+
+When you look at your command prompt, the character is a dollar sign: $
+
+To designate input you type in vs output the computer spits out, I will include the  `$` to show you type it in. But DON'T TYPE IN THE `$`.
 
 ### Launch the Terminal app.
 
@@ -45,7 +49,7 @@ NOTE: If you are reading this in the Markdown file, I'm using text inside of tic
 
 ### pwd - print working directory
 
-Type `pwd` in terminal, and it will respond with something like:
+Type `$ pwd` in terminal, and it will respond with something like:
 
 /Users/username/Documents/path_to/where_you_are
 
@@ -57,7 +61,7 @@ Now we are going to change our working directory to where we need to be. Because
 
 Type this into your terminal:
 
-`cd /Users/nicar/Desktop/hands_on/csvkit-nicar2018/`
+`$ cd /Users/nicar/Desktop/hands_on/csvkit-nicar2018/`
 
 The first two segments find the logged in user, "nicar" in this case. If you were logged in as "nicar" and folder surfing on your computer, you would go to your Desktop, double-click on the "hands_on" folder, which would contain the "csvkit-nicar2018" folder, which you would then open.
 
@@ -67,23 +71,26 @@ What we've done instead is to "change directory" to go inside this folder in our
 
 Now let's set what is inside this folder. Type this into your terminal:
 
-`ls`
+`$ ls`
 
 You should get in return something like this:
 
+``` txt
 105.csv       28.csv
 11.csv        Mixed_Beverage_Layout.pdf
 227.csv       README.md
 246.csv       counties.csv
+```
 
 This lists all the files in the folder in two columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
 
 Many cli tools like this take an argument, or flag, that changes or extends the behaivor of the command. Try:
 
-`ls -l`
+`$ ls -l`
 
 You should get something like:
 
+``` txt
 total 616
 -rw-r--r--@ 1 christian  staff   20730 Jan 26 23:54 105.csv
 -rw-r--r--@ 1 christian  staff    5066 Jan 26 23:54 11.csv
@@ -93,6 +100,7 @@ total 616
 -rw-r--r--@ 1 christian  staff   28583 Jan 26 21:55 Mixed_Beverage_Layout.pdf
 -rw-r--r--  1 christian  staff    6152 Jan 28 14:59 README.md
 -rw-r--r--@ 1 christian  staff    3886 Jan 26 22:33 counties.csv
+```
 
 This is the "long" listing that includes file permissions, owners, size, date, etc.
 
@@ -100,13 +108,15 @@ This is the "long" listing that includes file permissions, owners, size, date, e
 
 Before we use the "wc" command, let me tell you about tab completion. When in the terminal, you often don't have to type in entire names of files or folders. You type the beginning of a file name, then hit "tab" to complete the rest. Try it with the 11.csv file.
 
-Type in `wc 11` then hit tab. It should finish it out as:
+Type in `$ wc 11` then hit tab. It should finish it out as:
 
-`wc 11.csv`
+`$ wc 11.csv`
 
 Hit return and you get back:
 
+``` txt
       25     285    5066 11.csv
+```
 
 - "25" is the number of lines
 - "285" is the number of words
@@ -118,7 +128,7 @@ Later, we'll use "wc" with an "-l" flag to get onlty the number of lines: `wc -l
 
 Now we know there are 25 lines in this file, let's look at a little of it.
 
-`head 11.csv`
+`$ head 11.csv`
 
 (Don't forget tab complete!)
 
@@ -130,7 +140,7 @@ Scroll back and look at the top, and you can see the headers, but I have a bette
 
 This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a work-in-progress [cli-tools](https://github.com/utdata/cli-tools) lesson if you want further study later.
 
-## csvkit
+## csvkit basics
 
 Now we'll concentrate the power of csvkit.
 
@@ -140,7 +150,7 @@ Now we'll concentrate the power of csvkit.
 
 It also has a special flag "-n" to get the header names. Let's use:
 
-`csvcut -n 11.csv`
+`$ csvcut -n 11.csv`
 
 We get:
 
@@ -171,23 +181,23 @@ We get:
  24: Total_Receipts
 ```
 
-The names kinda speak for themselves. I have included the [Mixed_Beverage_Layout.pdf](Mixed_Beverage_Layout.pdf) file in case you really want to look further.
+The names of the columns kinda speak for themselves. I have included the [Mixed_Beverage_Layout.pdf](Mixed_Beverage_Layout.pdf) file in case you really want to look further.
 
-Suffice to say, the columns we are interested in are the Location columns and the Receipts columns.
+Suffice to say, the columns we are interested here are the Location columns and the Receipts columns.
 
 ### csvstack
 
 Before we look at these further, take my word for it and know that all five numbered files have the same header, though there are more rows in some files than others. The number of the file corresponds to the county it came from, but the county name is not in the data.
 
-We want to combine all the files into a single new file before we join to get the county names.
+We want to combine all the files into a single new file before we join with another file to get the county names.
 
-"csvstack" merges like files on top of each other, or "stacks" them. At it's easist, it just takes the file names as an argument. 
+"csvstack" merges like files on top of each other, or "stacks" them. At it's most basic, it just takes the file names as an argument. 
 
-`csvstack 11.csv 28.csv 105.csv 227.csv 246.csv`
+`$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv`
 
 Do that, and it will stack all the text and print it to your screen. Not particurly useful. What we need to do is redirect the output to a file, which we do with the ">" command. Let's call our files "stacked.csv":
 
-`csvstack 11.csv 28.csv 105.csv 227.csv 246.csv > stacked.csv`
+`$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv > stacked.csv`
 
 - Do `ls` to see that "stacked.csv" was created.
 - Do `wc -l 227.csv` to see how many lines were in the "227" file.
@@ -195,15 +205,19 @@ Do that, and it will stack all the text and print it to your screen. Not particu
 
 Congrats, you just merged five files into one with a single command!
 
-### redirect commands, csvcut -c and csvlook
+NOTEWORTHY: If these files did not have a Location_County id at all, but were named by their counties, like "bastrop.csv", you could use `csvstack -g bastrop.csv caldwell.csv > newfile.csv` to combine the files, and it would add a "group" column using the file names, so you know where they came from.
 
-Now that we have a 1127 line file, it might make since to just look at the top when we want to explore it. We redirect output with stacked into another file, but we can also redirect output into another command, and in fact string many commands together. That's what we'll work through here.
+### redirecting commands, csvcut -c and csvlook
 
-- start with `head stacked.csv` to see the first 10 lines.
+Now that we have a 1127 line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`, and in fact chain many commands together like this. That's what we'll work through here.
+
+- start with `$ head stacked.csv` to see the first 10 lines.
 
 "csvcut -c" allows us to select specific columns by their name or position. "csvlook" makes our output pretty. Let's work through them.
 
-- hit the up arrow on your keyboard to get back that last command, then add to it as follows: `head stacked.csv | csvcut -c Location_Name,Location_County`
+- hit the up arrow on your keyboard to get back that last command, then add to it as follows:
+
+`$ head stacked.csv | csvcut -c Location_Name,Location_County`
 
 You end up with:
 
@@ -220,13 +234,13 @@ JOSEPH'S STEAKHOUSE,11
 MORELIA MEXICAN CAFE,11
 ```
 
-We can make this easier to read by adding on "csvlook":
+We can make this easier to read with "csvlook":
 
-- hit the up arrow to get the last command, then add on "| csvlook" like this:
+- hit the up arrow to get the last command, then add on "| csvlook" to get this:
 
-`head stacked.csv | csvcut -c Location_Name,Location_County | csvlook`
+`$ head stacked.csv | csvcut -c Location_Name,Location_County | csvlook`
 
-Now it looks like this:
+Your output shoudl be:
 
 ``` text
 | Location_Name               | Location_County |
@@ -248,7 +262,7 @@ So, we proved the Location_County column sucks. Let's get some county names.
 
 Before we talk about the join, let's take a quick peek at the "counties.csv" file so we understand what we are doing.
 
-`head -n 15 counties.csv | csvlook`
+`$ head -n 15 counties.csv | csvlook`
 
 gives you this:
 
@@ -275,13 +289,13 @@ We passed the "-n 15" into "head" to change the number of lines to 15, so we cou
 
 Now we know that "Location_County" in "stacked.csv" matches "code" in the "counties.csv". Now we can use "csvjoin":
 
-`csvjoin -c "Location_County,code" stacked.csv counties.csv > mixbev.csv`
+`$ csvjoin -c "Location_County,code" stacked.csv counties.csv > joined.csv`
 
 Let's break that down: We use csvjoin and use -c to pass in the column names "Location_County,code". Make sure there is no space after the comma. Then we give it the two file names, in the same order as the column names. We then redirect theoutput to a file called "mixbev.csv".
 
 Peak at the columns names:
 
-`csvcut -n mixbev.csv`
+`$ csvcut -n joined.csv`
 
 We've added to columns at the end:
 
@@ -289,6 +303,114 @@ We've added to columns at the end:
  25: county
  26: code
 ```
+Take a look:
+
+`$ csvcut -c Location_Name,Location_County,county joined.csv | csvlook`
+
+At the bottom of the file we have the Williamson county name:
+
+``` txt
+| Y'ALL DOWN HOME CAFE                               |             246 | Williamson |
+| LONE ROCK BAR                                      |             246 | Williamson |
+| TUSK GRILL                                         |             246 | Williamson |
+```
+
+Congratulations, you've joined to files together without creating a database.
+
+### csvcut -c for ranges
+
+Let's show one last function with csvcut -- to select a range of columns to print.
+
+If we look at all the column names:
+
+`$ csvcut -n joined.csv`
+
+We get this
+
+```
+  1: Taxpayer_Number
+  2: Taxpayer_Name
+  3: Taxpayer_Address
+  4: Taxpayer_City
+  5: Taxpayer_State
+  6: Taxpayer_Zip
+  7: Taxpayer_County
+  8: Location_Number
+  9: Location_Name
+ 10: Location_Address
+ 11: Location_City
+ 12: Location_State
+ 13: Location_Zip
+ 14: Location_County
+ 15: TABC_Permit_Number
+ 16: Inside/Outside_City_Limits
+ 17: Responsibility_Begin_Date
+ 18: Responsibility_End_Date
+ 19: Obligation_End_Date
+ 20: Liquor_Receipts
+ 21: Wine_Receipts
+ 22: Beer_Receipts
+ 23: Cover_Charge_Receipts
+ 24: Total_Receipts
+ 25: county
+ 26: code
+```
+
+We really only need the Location_, Receipts_ and county column. Let's create a file with just those, based on the column numbers listed here. You can pick and choose rows by number, and string ranges together with a hyphen.
+
+`$ csvcut -c 8-14,20-25 joined.csv > mixbev.csv`
+
+That created our new file. Peek at the columns: `$ csvcut -n mixbev.csv`
+
+You now have:
+
+``` text
+  1: Location_Number
+  2: Location_Name
+  3: Location_Address
+  4: Location_City
+  5: Location_State
+  6: Location_Zip
+  7: Location_County
+  8: Liquor_Receipts
+  9: Wine_Receipts
+ 10: Beer_Receipts
+ 11: Cover_Charge_Receipts
+ 12: Total_Receipts
+ 13: county
+ ```
+
+## Let's talk about the value you've learned
+
+Those two major functions above, csvstack and csvjoin, can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet and you write a script to use csvkit to work through it. I once [wrote a script](https://github.com/utdata/cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets and combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
+
+There, you've gotten value from this class.
+
+For what we have left here, you might be able to open up mixbev.csv in Excel and do these steps faster, but sometimes you just need an answer or two and csvkit can do the trick.
+
+### csvstats
+
+Now that we have our merged and joined file in "mixbev.csv", let's learn some more about it.
+
+`csvstat mixbev.csv`
+
+This will take a couple of seconds to run.
+
+What can we learn from this?
+- The sum of all alcohol sales in the Austin MSA is "$70,354,620"
+- This highest Total_Reciepts value is "$869,818". We'll want to figure out who that is next.
+
+Let's find out that top seller in December 2017.
+
+### csvgrep and csvsort
+
+`csvgrep -c county -m Bastrop mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Total_Receipts | csvlook`
+
+
+
+
+
+
 
 
 ## Ideas
@@ -309,28 +431,9 @@ We've added to columns at the end:
 * csvstack for multiple files (hotels or schools?)
 * can I try csvquery (like with sum?)
 
-## Steps
-
-### csvcut
-
-See the headers
-`csvcut -n bastrop.csv`
-
-### csvstack
-
-`csvstack bastrop.csv caldwell.csv hays.csv travis.csv williamson.csv > stacked.csv`
-
-### csvjoin
-
-- look at headers for counties
-
-`csvjoin -c "Location_County,id" stacked.csv counties.csv > mixbev.csv`
 
 ### csvstat
 
-### csvgrep and csvsort
-
-`csvgrep -c county -m Bastrop mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Total_Receipts | csvlook`
 
 ## Things we won't do that's cool
 
