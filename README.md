@@ -5,7 +5,7 @@ Ever struggled with large data sets? Or need to quickly join or merge data sets 
  
 This session is good for: People who want a solution for working with multiple​​ CSV files without having to open Excel or to join or merge files without a database.
 
-Created for the 2018 CAR Conference March 8-11, 2018 in Chicago. By [Christian McDonald](http://github.com/critmcdonald).
+Created for the 2018 CAR Conference on March 8-11, 2018 in Chicago. By [Christian McDonald](http://github.com/critmcdonald).
 
 This lecture assumes use of Macintosh with csvkit installed globally using Python 3.6.
 
@@ -17,17 +17,17 @@ We want to write a story that illustrates the top alcohol sellers in each of the
 
 We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to do this work. It can handle quickly some tasks that might otherwise take many manual steps and be more prone to human error. It is NOT a complete data analysis package, but it can get you some basic answers if that is all you need.
 
-### Our outline
+### Our goals
 
-- learn some basic command-line commands to get around: pwd, cd, ls
-- inspect one of our files to learn about it
-- merge the five files into one
-- join the merged file with the counties lookup file
-- pare down the file so we have just the columns we need
-- get some summary stats
-- order rows to see top sellers
-- filter rows to get top sellers for specific counties
-- [MABYE] csvquery for sums in counties?
+- Learn some basic command-line commands to get around: pwd, cd, ls
+- Inspect one of our files to learn about it
+- Merge multiple files into one
+- Join the merged file with the counties lookup file
+- Pare down the file so we have just the columns we need
+- Get some summary stats
+- Order rows to see top sellers
+- Filter rows to get top sellers for specific locations
+- *MAYBE* csvquery for sums in counties?
 
 ## Getting around the terminal
 
@@ -37,15 +37,26 @@ Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the
 
 ### About commands
 
-When you look at your command prompt, the character is a dollar sign: $
+When you look at your command prompt in Terminal, the last character is a dollar sign: $
 
-To designate input you type in vs output the computer spits out, I will include the  `$` to show you type it in. But DON'T TYPE IN THE `$`.
+So, to designate input you type in vs output the computer spits out, I will include the  `$` to show you type it in. But DON'T TYPE IN THE `$`.
+
+`$ ls -l` is the command. Type just "ls -l" and then hit return.
+
+and this is the  output:
+
+```
+105.csv                   28.csv                   
+11.csv                    Mixed_Beverage_Layout.pdf
+227.csv                   README.md
+246.csv                   counties.csv
+```
 
 ### Launch the Terminal app.
 
   - It may be in the applications bar: A black box with `>_` inside it.
   - You can type command-space to get a search bar, and type in Terminal. Hit return.
-  - If the type is really small, you can to command-+ to make it bigger.
+  - If the type is really small, you can to "command +" to make it bigger.
 
 ### pwd - print working directory
 
@@ -53,7 +64,7 @@ Type `$ pwd` in terminal, and it will respond with something like:
 
 /Users/username/Documents/path_to/where_you_are
 
-This is important, because it can get confusing about where you are on the computer. Each of those "/" is a folder, and they are EXACTLY the same as the ones you normally browse through on your computer.
+This is important, because it can get confusing about where you are on the computer. Each of those "/" is a folder, and they are the same ones that you normally browse through on your computer.
 
 ### cd - change directory
 
@@ -303,16 +314,17 @@ We've added to columns at the end:
  25: county
  26: code
 ```
-Take a look:
 
-`$ csvcut -c Location_Name,Location_County,county joined.csv | csvlook`
+Take a look, using csvcut to look:
+
+`$ csvcut -c Location_Name,county joined.csv | csvlook`
 
 At the bottom of the file we have the Williamson county name:
 
 ``` txt
-| Y'ALL DOWN HOME CAFE                               |             246 | Williamson |
-| LONE ROCK BAR                                      |             246 | Williamson |
-| TUSK GRILL                                         |             246 | Williamson |
+| Y'ALL DOWN HOME CAFE                               | Williamson |
+| LONE ROCK BAR                                      | Williamson |
+| TUSK GRILL                                         | Williamson |
 ```
 
 Congratulations, you've joined to files together without creating a database.
@@ -325,7 +337,7 @@ If we look at all the column names:
 
 `$ csvcut -n joined.csv`
 
-We get this
+We get this:
 
 ```
   1: Taxpayer_Number
@@ -378,15 +390,15 @@ You now have:
  11: Cover_Charge_Receipts
  12: Total_Receipts
  13: county
- ```
+```
 
-## Let's talk about the value you've learned
+## Value of what you've learned so far
 
-Those two major functions above, csvstack and csvjoin, can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet and you write a script to use csvkit to work through it. I once [wrote a script](https://github.com/utdata/cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets and combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
+Those two major functions above, csvstack and csvjoin, can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet. I once [wrote a script](https://github.com/utdata/cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets to combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
 
 There, you've gotten value from this class.
 
-For what we have left here, you might be able to open up mixbev.csv in Excel and do these steps faster, but sometimes you just need an answer or two and csvkit can do the trick.
+At this point, you might be able to open up mixbev.csv in Excel and do these next steps faster, but sometimes you just need an answer or two and csvkit can do the trick, so let's explore more.
 
 ### csvstats
 
@@ -397,52 +409,172 @@ Now that we have our merged and joined file in "mixbev.csv", let's learn some mo
 This will take a couple of seconds to run.
 
 What can we learn from this?
-- The sum of all alcohol sales in the Austin MSA is "$70,354,620"
+- The sum of all alcohol sales in the Austin MSA in December 2017 was "$70,354,620"
 - This highest Total_Reciepts value is "$869,818". We'll want to figure out who that is next.
 
-Let's find out that top seller in December 2017.
+### csvsort
 
-### csvgrep and csvsort
+Let's find out that top seller. "csvsort" will sort your output to screen or redirection into another file, but it does not change the sort order of the original file.
 
-`csvgrep -c county -m Bastrop mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Total_Receipts | csvlook`
+Let's type in all in, then break it down:
 
+`$ csvsort -c Total_Receipts -r mixbev.csv | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
+- `csvsort -c Total_Receipts -r` is our new command. `csvsort` is the command, and we are passing the `-c` flag and the name of a column to sort. The `-r` that follows says to reverse sort, so we have the largest number at the top. Journalists almost always want the largest number first. We have to do this first (or at least before our `head` command) so it considers the whole file.
+- We pipe this into `csvcut` passing in our name, address, county and receipts fields. This is just for nice output of fields we need.
+- We pass through to `head` to look at just the top 10 rows intead of all of them.
+- We pass through to `csvlook` to make it pretty. I added the `--max-column-width 20` because some of the restaurant names are really long, and would break each row into multiple lines.
 
+So, our result is this:
+```
+| Location_Name        | Location_Address     | county | Total_Receipts |
+| -------------------- | -------------------- | ------ | -------------- |
+| WLS BEVERAGE CO      | 110 E 2ND ST         | Travis |        869,818 |
+| W HOTEL AUSTIN       | 200 LAVACA ST        | Travis |        581,798 |
+| DH BEVERAGE LLC      | 604 BRAZOS ST        | Travis |        563,253 |
+| ROSE ROOM/ 77 DEG... | 11500 ROCK ROSE AVE  | Travis |        527,145 |
+| 400 BAR/CUCARACHA... | 400 E 6TH ST         | Travis |        466,017 |
+| SAN JACINTO BEVER... | 98 SAN JACINTO BLVD  | Travis |        459,049 |
+| THE ROOSEVELT ROO... | 307 W 5TH ST # 307B  | Travis |        436,238 |
+| THE DOGWOOD DOMAIN   | 11420 ROCK ROSE A... | Travis |        419,467 |
+| KUNG FU SALOON       | 11501 ROCK ROSE A... | Travis |        411,707 |
+```
 
+A quick [Google Maps search](https://goo.gl/maps/TdsMbkd3Jjm) tells me "110 E 2ND ST" is the J.W. Marriott hotel in downtown Austin. I can tell you they have lead alcohol sales in the city of Austin each month since they opened in February 2015.
 
+### csvgrep - filter rows of data through matching
 
+All of the results above are in Travis County, which includes Austin. What about sales in the suburban counties (Bastrop, Caldwell, Hays, Williamson)?
 
+We can use `csvgrep` to match rows based on a pattern or regular expression. We'll use a pattern, and we'll start with Bastrop.
 
-## Ideas
+We are basically using the same command as the last one (so you can arrow up to get that) and editing the beginning to include the `csvgrep` part:
 
-* use mixbev
-  - needs clean
-  - needs cut for austin
-  - needs join with county
+`$ csvgrep -c county -m "Bastrop" mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
-* use wc -l to see number of rows
-* use csvcut -n to get names?
-* use csvjoin to get county?
-* add csvgrep to get Travis? This takes a LONG time. Maybe start with Travis and find Austin? Or MSA?
-* create a new file for travis
-* get stats
-* check for dupes
-* fixed-width file (maybe just explain and show? Could use BIRLS)
-* csvstack for multiple files (hotels or schools?)
-* can I try csvquery (like with sum?)
+Let's break down the csvgrep part of this:
 
+- `csvgrep` is the command.
+- "county" is the column we want to search, so we pass that in with `-c county`.
+- We are using a pattern match, so we pass in `-m` and then then the word or phrase we are searching. It could be more than one word, like "MAIN ST".
+- And of course the file we are searching.
 
-### csvstat
+To review the order of all the commands in plain English we are: Searching the mixbev.csv file in the county column for "Bastrop", then we sort on Total_Receipts in reverse order, then we cut out just the columnds we need (and name them), then we get the top 10 results, then we make them look pretty, limiting the width of columns to 20 characters. Got it?
+
+Now we have just Bastrop:
+
+```
+| Location_Name        | Location_Address     | county  | Total_Receipts |
+| -------------------- | -------------------- | ------- | -------------- |
+| LOST PINES BEVERA... | 575 HYATT LOST PI... | Bastrop |        290,195 |
+| OLD TOWN RESTURAN... | 931 MAIN ST          | Bastrop |         94,519 |
+| SP BASTROP THEATR... | 1600 CHESTNUT ST     | Bastrop |         43,273 |
+| CHILI'S GRILL & BAR  | 734 HIGHWAY 71 W     | Bastrop |         42,059 |
+| NEIGHBOR'S           | 601 CHESTNUT ST U... | Bastrop |         26,995 |
+| RED ROCK STEAKHOU... | 101 S LENTZ ST       | Bastrop |         26,945 |
+| VIEJO'S TACOS Y T... | 912 MAIN ST          | Bastrop |         23,349 |
+| COACH Q'S SOCIAL ... | 303 MAIN ST          | Bastrop |         21,630 |
+| MORELIA MEXICAN G... | 696 HIGHWAY 71 W ... | Bastrop |         20,665 |
+```
+
+We could exchange the word "Bastrop" for the other county names (or even part of the name, like "Will" to get Williamson).
+
+But let's look at it another way. What are the top sellers outside of Austin? The `csvgrep` also has `-i` which is the inverse of a search.
+
+`$ csvgrep -c Location_City -m "AUSTIN" -i mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Location_Address,Location_City,Total_Receipts | head | csvlook --max-column-width 15`
+
+```
+| Location_Name   | Location_Add... | Location_City | Total_Receipts |
+| --------------- | --------------- | ------------- | -------------- |
+| LOST PINES B... | 575 HYATT LO... | LOST PINES    |        290,195 |
+| CHUY'S          | 4911 183A TO... | CEDAR PARK    |        172,579 |
+| CHUY'S ROUND... | 2320 N INTER... | ROUND ROCK    |        165,153 |
+| JACK ALLEN'S... | 2500 HOPPE TRL  | ROUND ROCK    |        148,393 |
+| MAVERICKS       | 1700 GRAND A... | PFLUGERVILLE  |        147,058 |
+| THIRD BASE R... | 3107 S INTER... | ROUND ROCK    |        137,628 |
+| RICK'S CABARET  | 3105 S INTER... | ROUND ROCK    |        137,563 |
+| TWIN PEAKS R... | 100 LOUIS HE... | ROUND ROCK    |        134,566 |
+| TRATTORIA LI... | 13308 FM 150 W  | DRIFTWOOD     |        121,814 |
+```
+
+### csvsql - like peanut butter and chocolate
+
+The [csvsql](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html?highlight=query#csvsql-and-sql2csv-ultimate-power) can help you import and export your csv to and from database formats. But it will also do a simple query of the data itself using the sqlite package built into csvkt. This is more just to show you can do it. (I even get a lot of python errors, but the math is sound.)
+
+Let's sum the total sold by county:
+
+```
+$ csvsql --query "select county,sum(Total_Receipts) from mixbev group by 1;" mixbev.csv | csvlook
+| county     |      Total |
+| ---------- | ---------- |
+| Bastrop    |    720,659 |
+| Caldwell   |     63,406 |
+| Hays       |  3,274,053 |
+| Travis     | 59,526,973 |
+| Williamson |  6,769,529 |
+
+```
+
+or by city:
+
+```
+$ csvsql --query "select Location_City,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook
+| Location_City    |      Total |
+| ---------------- | ---------- |
+| AUSTIN           | 58,165,637 |
+| BASTROP          |    314,416 |
+| BEE CAVE         |    407,434 |
+| BEE CAVES        |    102,144 |
+| BRIARCLIFF       |          0 |
+| BUDA             |    398,563 |
+| CEDAR PARK       |  1,739,899 |
+| COUPLAND         |     14,760 |
+| DEL VALLE        |    115,888 |
+| DRIFTWOOD        |    234,303 |
+| DRIPPING SPRINGS |    242,868 |
+| ELGIN            |     41,419 |
+| FLORENCE         |     21,512 |
+| GEORGETOWN       |    913,469 |
+| GRANGER          |     15,768 |
+| HUTTO            |    105,223 |
+| JONESTOWN        |          0 |
+| KYLE             |    210,581 |
+| LAGO VISTA       |     48,934 |
+| LAKEWAY          |    723,034 |
+| LEANDER          |    129,526 |
+| LIBERTY HILL     |     76,366 |
+| LOCKHART         |     63,386 |
+| LOST PINES       |    290,195 |
+| LULING           |         20 |
+| MANOR            |     38,049 |
+| PFLUGERVILLE     |    585,617 |
+| RED ROCK         |     26,945 |
+| ROLLINGWOOD      |     29,846 |
+| ROUND ROCK       |  2,566,691 |
+| SAN MARCOS       |  2,169,050 |
+| SMITHVILLE       |     47,684 |
+| SPICEWOOD        |    101,268 |
+| SUNSET VALLEY    |    195,306 |
+| TAYLOR           |     76,425 |
+| VOLENTE          |      5,502 |
+| WEST LAKE HILLS  |     91,059 |
+| WIMBERLEY        |     45,833 |
+```
 
 
 ## Things we won't do that's cool
 
-You can turn an Excel spreadsheet into a csv with [in2csv](https://csvkit.readthedocs.io/en/1.0.2/tutorial/1_getting_started.html#in2csv-the-excel-killer)
+- You can turn an Excel spreadsheet into a csv with [in2csv](https://csvkit.readthedocs.io/en/1.0.2/tutorial/1_getting_started.html#in2csv-the-excel-killer)
+
+## Setting up your computer
+
+- I recommend [conda](https://conda.io/docs/user-guide/install/index.html)
 
 ## Running Python in a browser
 
 * python anywhere?
-* jupyter notebooks
+* Jupyter notebooks
+  - The is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter.
 
 ## Resources
 
