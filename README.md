@@ -27,7 +27,7 @@ We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to do th
 - Get some summary stats
 - Order rows to see top sellers
 - Filter rows to get top sellers for specific locations
-- *MAYBE* csvquery for sums in counties?
+- Get sums in counties and cities
 
 ## Getting around the terminal
 
