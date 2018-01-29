@@ -11,7 +11,7 @@ This lecture assumes use of Macintosh with csvkit installed globally using Pytho
 
 ## Our scenario
 
-We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) for five different counties that make up the MSA that includes Austin, Texas. The data convers the December 2017 reporting period.
+We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) for five different counties that make up the MSA that includes Austin, Texas. The data covers the December 2017 reporting period.
 
 We want to write a story that illustrates the top alcohol sellers in each of the five counties, and some summaries for the area as a whole. But there is a catch ... the county name is not in the file. We do, however, have a lookup table to match county ID with a name.
 
@@ -408,8 +408,30 @@ Now that we have our merged and joined file in "mixbev.csv", let's learn some mo
 
 This will take a couple of seconds to run.
 
+This is just a part of the output:
+
+```
+12. "Total_Receipts"
+
+  Type of data:          Number
+  Contains null values:  False
+  Unique values:         1109
+  Smallest value:        0
+  Largest value:         869,818
+  Sum:                   70,354,620
+  Mean:                  57,385.498
+  Median:                35,139.5
+  StDev:                 74,487.296
+  Most common values:    0 (111x)
+                         7,429 (2x)
+                         9,467 (2x)
+                         21,489 (2x)
+                         42,057 (2x)
+```
+
 What can we learn from this?
 - The sum of all alcohol sales in the Austin MSA in December 2017 was "$70,354,620"
+- The average was $57,385 and the median was $35,139. Though I'm not sure we would report those.
 - This highest Total_Reciepts value is "$869,818". We'll want to figure out who that is next.
 
 ### csvsort
