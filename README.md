@@ -5,9 +5,9 @@ Ever struggled with large data sets? Or need to quickly join or merge data sets 
  
 This session is good for: People who want a solution for working with multiple​​ CSV files without having to open Excel or to join or merge files without a database.
 
-Created for the 2018 CAR Conference on March 8-11, 2018 in Chicago. By [Christian McDonald](http://github.com/critmcdonald).
+Created b [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
 
-This lecture assumes use of Macintosh with csvkit installed globally using Python 3.6.
+This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6.
 
 ## Our scenario
 
@@ -15,9 +15,9 @@ We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Gove
 
 We want to write a story that illustrates the top alcohol sellers in each of the five counties, and some summaries for the area as a whole. But there is a catch ... the county name is not in the file. We do, however, have a lookup table to match county ID with a name.
 
-We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to do this work. It can handle quickly some tasks that might otherwise take many manual steps and be more prone to human error. It is NOT a complete data analysis package, but it can get you some basic answers if that is all you need.
+We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to do this work. It can quickly handle tasks that might otherwise be more prone to human error if done manually in Excel. It is NOT a complete data analysis package, but it can get you some basic answers if that is all you need.
 
-### Our goals
+### Our goals for this lesson
 
 - Learn some basic command-line commands to get around: pwd, cd, ls
 - Inspect one of our files to learn about it
@@ -35,13 +35,14 @@ For those unfamiliar with "the command line", Terminal is an application that us
 
 Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the computer. It'll be ok.
 
-### About commands
+### About commands in this lesson
 
-When you look at your command prompt in Terminal, the last character is a dollar sign: $
+These directions are writtin in a syntax called Markdown. It looks pretty when we look at it on gitub, but it might be confusing if you are looking at the README.md file a text editor, and aren't familiar with Markdown.
 
-So, to designate input you type in vs output the computer spits out, I will include the  `$` to show you type it in. But DON'T TYPE IN THE `$`.
+- Code blocks are enclosed in backtick marks. This makes them stand out on Gitub.
+- To designate the input you type in vs output the computer spits out, I will use the `$` at the beginning to show you to type it in. But DON'T TYPE IN THE `$`. Or the backtick marks.
 
-`$ ls -l` is the command. Type just "ls -l" and then hit return.
+So, if `$ ls -l` is the command. Type just "ls -l" and then hit return.
 
 and this is the  output:
 
@@ -52,19 +53,19 @@ and this is the  output:
 246.csv                   counties.csv
 ```
 
-### Launch the Terminal app.
+### Launch the Terminal app
 
-  - It may be in the applications bar: A black box with `>_` inside it.
-  - You can type command-space to get a search bar, and type in Terminal. Hit return.
-  - If the type is really small, you can to "command +" to make it bigger.
+- It may be in the applications bar: A black box with `>_` inside it.
+- Or, you can type command-space to get a search bar, and type in Terminal. Hit return.
+- If the type is really small, you can to "command +" to make it bigger.
 
 ### pwd - print working directory
 
 Type `$ pwd` in terminal, and it will respond with something like:
 
-/Users/username/Documents/path_to/where_you_are
+`/Users/username/`
 
-This is important, because it can get confusing about where you are on the computer. Each of those "/" is a folder, and they are the same ones that you normally browse through on your computer.
+This command is useful because it can get confusing about where you are on the computer. Each of those "/" designates a folder, and they are the same ones that you normally browse through on your computer.
 
 ### cd - change directory
 
@@ -78,6 +79,13 @@ The first two segments find the logged in user, "nicar" in this case. If you wer
 
 What we've done instead is to "change directory" to go inside this folder in our terminal. This is where we'll stay for remainder of the class.
 
+Now, let's make sure you really where you should be. Type in `$pwd` command and you should get the path back at you.:
+
+```
+$ pwd
+/Users/nicar/Desktop/hands_on/csvkit-nicar2018/
+```
+
 ### ls - list
 
 Now let's set what is inside this folder. Type this into your terminal:
@@ -87,15 +95,14 @@ Now let's set what is inside this folder. Type this into your terminal:
 You should get in return something like this:
 
 ``` txt
-105.csv       28.csv
-11.csv        Mixed_Beverage_Layout.pdf
-227.csv       README.md
-246.csv       counties.csv
+105.csv                   246.csv                   README.md
+11.csv                    28.csv                    counties.csv
+227.csv                   Mixed_Beverage_Layout.pdf
 ```
 
-This lists all the files in the folder in two columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
+This lists all the files in the folder, but perhaps in multiople columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
 
-Many cli tools like this take an argument, or flag, that changes or extends the behaivor of the command. Try:
+Many cli tools like `ls` this take an argument, or flag, that changes or extends the behaivor of the command. Try:
 
 `$ ls -l`
 
@@ -133,7 +140,12 @@ Hit return and you get back:
 - "285" is the number of words
 - "5006" is the number of bytes
 
-Later, we'll use "wc" with an "-l" flag to get onlty the number of lines: `wc -l 11.csv`
+We'll use this with the `-l` flag to see just the number of lines in files.
+
+```
+$ wc -l 11.csv
+      25 11.csv
+```
 
 ### head
 
@@ -145,15 +157,15 @@ Now we know there are 25 lines in this file, let's look at a little of it.
 
 Hit return, and you'll see the first 10 lines of the "11.csv" file run across your screen.
 
-Scroll back and look at the top, and you can see the headers, but I have a better way below.
+Scroll back and look at the top of this return, and you can see the headers, but I have a better way below.
 
 ### More terminal
 
 This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a work-in-progress [cli-tools](https://github.com/utdata/cli-tools) lesson if you want further study later.
 
-## csvkit basics
+## csvkit
 
-Now we'll concentrate the power of csvkit.
+Now we'll concentrate the power of csvkit. If you want more information on any of hte commands we use, read the documenation at https://csvkit.rtfd.org.
 
 ### csvcut -n
 
@@ -198,29 +210,29 @@ Suffice to say, the columns we are interested here are the Location columns and 
 
 ### csvstack
 
-Before we look at these further, take my word for it and know that all five numbered files have the same header, though there are more rows in some files than others. The number of the file corresponds to the county it came from, but the county name is not in the data.
+In the interest of time, take my word for it and know that all five numbered files have the same header, though there are more rows in some files than others. The number of the file corresponds to the county it came from, but the county name itself is not in the data.
 
 We want to combine all the files into a single new file before we join with another file to get the county names.
 
-"csvstack" merges like files on top of each other, or "stacks" them. At it's most basic, it just takes the file names as an argument. 
+[csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) merges like files on top of each other, or "stacks" them. At its most basic, you just feed it filename. 
 
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv`
 
-Do that, and it will stack all the text and print it to your screen. Not particurly useful. What we need to do is redirect the output to a file, which we do with the ">" command. Let's call our files "stacked.csv":
+Do that, and it will stack all the text and print it to your screen. Not particurly useful. What we need to do is redirect the output to a file instead of our screen, which we do with the ">" command. Let's call our files "stacked.csv":
 
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv > stacked.csv`
 
-- Do `ls` to see that "stacked.csv" was created.
-- Do `wc -l 227.csv` to see how many lines were in the "227" file.
-- Do `wc -l stacked.csv` to see that the "stacked" file has more.
+- Do `$ ls` to see that "stacked.csv" was created.
+- Do `$ wc -l 227.csv` to see how many lines were in the "227" file.
+- Do `$ wc -l stacked.csv` to see that the "stacked" file has more.
 
 Congrats, you just merged five files into one with a single command!
 
-NOTEWORTHY: If these files did not have a Location_County id at all, but were named by their counties, like "bastrop.csv", you could use `csvstack -g bastrop.csv caldwell.csv > newfile.csv` to combine the files, and it would add a "group" column using the file names, so you know where they came from.
+NOTEWORTHY: If these files were named by their counties, like "bastrop.csv", you could use `csvstack -g bastrop.csv caldwell.csv > newfile.csv` to combine the files, and it would add a "group" column using the file names, so you would know where they came from.
 
 ### redirecting commands, csvcut -c and csvlook
 
-Now that we have a 1127 line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`, and in fact chain many commands together like this. That's what we'll work through here.
+Now that we have our one 1127-line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`, and in fact chain many commands together like this. That's what we'll work through here.
 
 - start with `$ head stacked.csv` to see the first 10 lines.
 
@@ -271,13 +283,13 @@ So, we proved the Location_County column sucks. Let's get some county names.
 
 ### csvjoin
 
-Before we talk about the join, let's take a quick peek at the "counties.csv" file so we understand what we are doing.
+Before we talk about csvjoin, let's take a quick peek at the "counties.csv" file so we understand what we are doing.
 
 `$ head -n 15 counties.csv | csvlook`
 
 gives you this:
 
-``` text
+```
 | id | county    | code |
 | -- | --------- | ---- |
 |  1 | Anderson  |    1 |
@@ -298,7 +310,7 @@ gives you this:
 
 We passed the "-n 15" into "head" to change the number of lines to 15, so we could see the value for Bastrop, whose code is 11. This matches our "11.csv" filename, so we are in the right track.
 
-Now we know that "Location_County" in "stacked.csv" matches "code" in the "counties.csv". Now we can use "csvjoin":
+Now we know that "Location_County" in "stacked.csv" matches "code" in the "counties.csv". Now we can use [csvjoin](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvjoin-merging-related-data):
 
 `$ csvjoin -c "Location_County,code" stacked.csv counties.csv > joined.csv`
 
@@ -308,7 +320,7 @@ Peak at the columns names:
 
 `$ csvcut -n joined.csv`
 
-We've added to columns at the end:
+We've added two columns at the end:
 
 ```
  25: county
@@ -368,41 +380,39 @@ We get this:
  26: code
 ```
 
-We really only need the Location_, Receipts_ and county column. Let's create a file with just those, based on the column numbers listed here. You can pick and choose rows by number, and string ranges together with a hyphen.
+Note the numbered columns. We really only need the Location_, Receipts_ and county column. Let's create a new file with just those columns, which we can do based those column numbers. You can pick and choose rows by number, and/or string ranges together with a hyphen.
 
-`$ csvcut -c 8-14,20-25 joined.csv > mixbev.csv`
+`$ csvcut -c 9-14,20-22,24-25 joined.csv > mixbev.csv`
 
-That created our new file. Peek at the columns: `$ csvcut -n mixbev.csv`
+That created our new file. Peek at the columns:
 
-You now have:
+```
+$ csvcut -n mixbev.csv 
+  1: Location_Name
+  2: Location_Address
+  3: Location_City
+  4: Location_State
+  5: Location_Zip
+  6: Location_County
+  7: Liquor_Receipts
+  8: Wine_Receipts
+  9: Beer_Receipts
+ 10: Total_Receipts
+ 11: county
 
-``` text
-  1: Location_Number
-  2: Location_Name
-  3: Location_Address
-  4: Location_City
-  5: Location_State
-  6: Location_Zip
-  7: Location_County
-  8: Liquor_Receipts
-  9: Wine_Receipts
- 10: Beer_Receipts
- 11: Cover_Charge_Receipts
- 12: Total_Receipts
- 13: county
 ```
 
 ## Value of what you've learned so far
 
-Those two major functions above, csvstack and csvjoin, can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet. I once [wrote a script](https://github.com/utdata/cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets to combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
+Those two major functions above, [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) and [csvjoin](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvjoin-merging-related-data), can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet. I once [wrote a script](https://github.com/utdata/cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets to combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
 
 There, you've gotten value from this class.
 
-At this point, you might be able to open up mixbev.csv in Excel and do these next steps faster, but sometimes you just need an answer or two and csvkit can do the trick, so let's explore more.
+At this point, you might be able to open up mixbev.csv in Excel and do these next next steps faster, but sometimes you just need an answer or two and csvkit can do the trick, so let's explore more.
 
-### csvstats
+### csvstat - about your data
 
-Now that we have our merged and joined file in "mixbev.csv", let's learn some more about it.
+Now that we have our merged and joined file in "mixbev.csv", let's learn some more about it with [csvstat](http://csvkit.readthedocs.io/en/1.0.2/tutorial/2_examining_the_data.html#csvstat-statistics-without-code).
 
 `csvstat mixbev.csv`
 
@@ -411,7 +421,7 @@ This will take a couple of seconds to run.
 This is just a part of the output:
 
 ```
-12. "Total_Receipts"
+10. "Total_Receipts"
 
   Type of data:          Number
   Contains null values:  False
@@ -430,22 +440,22 @@ This is just a part of the output:
 ```
 
 What can we learn from this?
-- The sum of all alcohol sales in the Austin MSA in December 2017 was "$70,354,620"
+- The sum of all alcohol sales in the Austin MSA in December 2017 was $70,354,620.
 - The average was $57,385 and the median was $35,139. Though I'm not sure we would report those.
 - This highest Total_Reciepts value is "$869,818". We'll want to figure out who that is next.
 
 ### csvsort
 
-Let's find out that top seller. "csvsort" will sort your output to screen or redirection into another file, but it does not change the sort order of the original file.
+Let's find out that top seller. [csvsort](http://csvkit.readthedocs.io/en/1.0.2/tutorial/2_examining_the_data.html#csvsort-order-matters) will sort your output to screen or redirection into another file, but it does not change the sort order of the original file.
 
-Let's type in all in, then break it down:
+Let's type in all in and run it, then break it down:
 
 `$ csvsort -c Total_Receipts -r mixbev.csv | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
-- `csvsort -c Total_Receipts -r` is our new command. `csvsort` is the command, and we are passing the `-c` flag and the name of a column to sort. The `-r` that follows says to reverse sort, so we have the largest number at the top. Journalists almost always want the largest number first. We have to do this first (or at least before our `head` command) so it considers the whole file.
-- We pipe this into `csvcut` passing in our name, address, county and receipts fields. This is just for nice output of fields we need.
-- We pass through to `head` to look at just the top 10 rows intead of all of them.
-- We pass through to `csvlook` to make it pretty. I added the `--max-column-width 20` because some of the restaurant names are really long, and would break each row into multiple lines.
+- `csvsort -c Total_Receipts -r` is our new command. "csvsort" is the command, and we are passing the "-c" flag and the name of a column to sort. The "-r" that follows says to reverse sort, so we have the largest number at the top. Journalists almost always want the largest number first. We have to do this first (or at least before our "head" command) so it considers the whole file.
+- We pipe this into "csvcut" passing in our name, address, county and receipts fields. This is just for nice output of fields we need.
+- We pass through to "head" to look at just the top 10 rows intead of all of them.
+- We pass through to "csvlook" to make it pretty. I added the "--max-column-width 20" because some of the restaurant names are really long, and would break each row into multiple lines.
 
 So, our result is this:
 ```
