@@ -7,15 +7,15 @@ This session is good for: People who want a solution for working with multipleâ€
 
 Created b [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
 
-This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6.
+This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6, which is now the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
 
 ## Our scenario
 
-We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) for five different counties that make up the MSA that includes Austin, Texas. The data covers the December 2017 reporting period.
+We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) for five different counties that make up the Austin-Round Rock, TX Metropolitan Statistical Area. The data covers the December 2017 reporting period.
 
-We want to write a story that illustrates the top alcohol sellers in each of the five counties, and some summaries for the area as a whole. But there is a catch ... the county name is not in the file. We do, however, have a lookup table to match county ID with a name.
+We want to write a story that illustrates the top alcohol sellers in each of the five counties, and some summaries for the area as a whole. But there are two catches: We have five files instead of one, and the county name is not in the file. We do, however, have a lookup table to match county ID with a name.
 
-We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to do this work. It can quickly handle tasks that might otherwise be more prone to human error if done manually in Excel. It is NOT a complete data analysis package, but it can get you some basic answers if that is all you need.
+We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to solve our challenges and get the answers we need for our story. It can quickly handle tasks that might otherwise be more prone to human error if done manually in Excel. It is NOT a complete data analysis package, but it can get you some basic answers if that is all you need.
 
 ### Our goals for this lesson
 
