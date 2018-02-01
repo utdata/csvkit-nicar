@@ -37,9 +37,9 @@ Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the
 
 ### About commands in this lesson
 
-These directions are written in a syntax called Markdown. It looks pretty when we look at it on [github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md, but it might be confusing if you are looking at the README.md file a text editor, and aren't familiar with Markdown.
+These directions are written in a syntax called Markdown. It looks pretty when we look at it on [github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md, but it might be confusing if you are looking at the README.md file in a text editor, and aren't familiar with Markdown.
 
-- Code blocks are enclosed in backtick marks. This makes them stand out on Gitub.
+- Code blocks are enclosed in backtick marks. This makes them stand out on Gitub. The backticks are not part of the command.
 - To designate the input you type in vs output the computer spits out, I will use the `$` at the beginning to show you to type it in. But DON'T TYPE IN THE `$`. Or the backtick marks.
 
 So, if `$ ls -l` is the command. Type just "ls -l" and then hit return.
@@ -56,8 +56,11 @@ and this is the  output:
 ### Launch the Terminal app
 
 - It may be in the applications bar: A black box with `>_` inside it.
+- Or you can click on the rocket-looking Launcher app in the applications bar and type in Terminal and then select it.
 - Or, you can type command-space to get a search bar, and type in Terminal. Hit return.
-- If the type is really small, you can to "command +" to make it bigger.
+- Or, you can look in the Applications folder, then inside the Utilities folder
+
+If you find the type is really small, you can to "command +" to make it bigger.
 
 ### pwd - print working directory
 
@@ -100,9 +103,9 @@ You should get in return something like this:
 227.csv                   Mixed_Beverage_Layout.pdf
 ```
 
-This lists all the files in the folder, but perhaps in multiople columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
+This lists all the files in the folder, but perhaps in multiple columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
 
-Many cli tools like `ls` this take an argument, or flag, that changes or extends the behaivor of the command. Try:
+Many cli tools like `ls` take an argument, or flag, that changes or extends the behavior of the command. Try:
 
 `$ ls -l`
 
@@ -157,7 +160,7 @@ Now we know there are 25 lines in this file, let's look at a little of it.
 
 Hit return, and you'll see the first 10 lines of the "11.csv" file run across your screen.
 
-Scroll back and look at the top of this return, and you can see the headers, but I have a better way below.
+Scroll back and look at the top of this return, and you can see the headers, but I have a better way below to see those.
 
 ### More terminal
 
@@ -165,7 +168,7 @@ This is all the bash/terminal basics we'll cover, because csvkit is our focus. I
 
 ## csvkit
 
-Now we'll concentrate the power of csvkit. If you want more information on any of hte commands we use, read the documenation at https://csvkit.rtfd.org.
+Now we'll concentrate the power of csvkit. If you want more information on any of the commands we use, read the documentation at https://csvkit.rtfd.org.
 
 ### csvcut -n
 
@@ -210,15 +213,15 @@ Suffice to say, the columns we are interested here are the Location columns and 
 
 ### csvstack
 
-In the interest of time, take my word for it and know that all five numbered files have the same header, though there are more rows in some files than others. The number of the file corresponds to the county it came from, but the county name itself is not in the data.
+In the interest of time, take my word for it and know that all five numbered files are structured the same and have the same header, though there are more rows in some files than others. The number of the file corresponds to the county it came from, but the county name itself is not in the data.
 
 We want to combine all the files into a single new file before we join with another file to get the county names.
 
-[csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) merges like files on top of each other, or "stacks" them. At its most basic, you just feed it filename. 
+The command [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) merges like files on top of each other, or "stacks" them. At its most basic, you just feed it filenames. 
 
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv`
 
-Do that, and it will stack all the text and print it to your screen. Not particurly useful. What we need to do is redirect the output to a file instead of our screen, which we do with the ">" command. Let's call our files "stacked.csv":
+Do that, and it will stack all the text and print it to your screen. Not particularly useful. What we need to do is redirect the output to a file instead of our screen, which we do with the ">" command. Let's call our files "stacked.csv":
 
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv > stacked.csv`
 
@@ -232,17 +235,17 @@ NOTEWORTHY: If these files were named by their counties, like "bastrop.csv", you
 
 ### redirecting commands, csvcut -c and csvlook
 
-Now that we have our one 1127-line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`, and in fact chain many commands together like this. That's what we'll work through here.
+Now that we have our one 1127-line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`. In fact, we'll chain many commands together like this. That's what we'll work through here.
 
 - start with `$ head stacked.csv` to see the first 10 lines.
 
-"csvcut -c" allows us to select specific columns by their name or position. "csvlook" makes our output pretty. Let's work through them.
+Now let's talk about the command we'll add onto this. "csvcut -c" allows us to select specific columns by their name or position. "csvlook" makes our output pretty. Let's work through and add them one at a time.
 
 - hit the up arrow on your keyboard to get back that last command, then add to it as follows:
 
 `$ head stacked.csv | csvcut -c Location_Name,Location_County`
 
-You end up with:
+Hit return and you end up with:
 
 ``` text
 Location_Name,Location_County
@@ -279,7 +282,7 @@ Your output should be:
 | MORELIA MEXICAN CAFE        |              11 |
 ```
 
-So, we proved the Location_County column sucks. Let's get some county names.
+So, we've made our output pretty enough to realize the Location_County column is near useless to us. Let's get some county names.
 
 ### csvjoin
 
@@ -308,7 +311,9 @@ gives you this:
 | 14 | Bell      |   14 |
 ```
 
-We passed the "-n 15" argument into "head" to change the number of lines to 15, so we could see the value for Bastrop, whose code is 11. This matches our "11.csv" filename, so we are on the right track.
+We passed the "-n 15" argument into "head" to change the number of lines to 15, so we could see the value for Bastrop, whose code is 11. I happen to know this matches our "11.csv" filename, so we are on the right track.
+
+If we need to talk more about what a "join" is here, we can. If not, we'll move on.
 
 Now we know that "Location_County" in "stacked.csv" matches "code" in the "counties.csv". Now we can use [csvjoin](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvjoin-merging-related-data):
 
