@@ -23,7 +23,7 @@ We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to solve
 - Inspect one of our files to learn about it
 - Merge multiple files into one
 - Join the merged file with the counties lookup file
-- Pare down the file so we have just the columns we need
+- Pare down the resulting file so we have just the columns we need
 - Get some summary stats
 - Order rows to see top sellers
 - Filter rows to get top sellers for specific locations
@@ -31,13 +31,13 @@ We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to solve
 
 ## Getting around the terminal
 
-For those unfamiliar with "the command line", Terminal is an application that uses a "Command Line Interface" (cli) to communicate with your computer. The language it is using is called Bash, even though the tool we are talking to mostly will be csvkit, which is built in Python.
+For those unfamiliar with "the command line", Terminal is an application that uses a "Command Line Interface" (cli) to communicate with your computer. The language it is using is called Bash, even though the tool we mostly using, csvkit, is built in Python.
 
 Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the computer. It'll be ok.
 
 ### About commands in this lesson
 
-These directions are writtin in a syntax called Markdown. It looks pretty when we look at it on gitub, but it might be confusing if you are looking at the README.md file a text editor, and aren't familiar with Markdown.
+These directions are written in a syntax called Markdown. It looks pretty when we look at it on [github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md, but it might be confusing if you are looking at the README.md file a text editor, and aren't familiar with Markdown.
 
 - Code blocks are enclosed in backtick marks. This makes them stand out on Gitub.
 - To designate the input you type in vs output the computer spits out, I will use the `$` at the beginning to show you to type it in. But DON'T TYPE IN THE `$`. Or the backtick marks.
