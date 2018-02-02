@@ -80,7 +80,7 @@ Type this into your terminal:
 
 The first two segments find the logged in user, "nicar" in this case. If you were logged in as "nicar" and folder surfing on your computer, you would go to your Desktop, double-click on the "hands_on" folder, which would contain the "csvkit-nicar2018" folder, which you would then open.
 
-What we've done instead is to "change directory" to go inside this folder in our terminal. This is where we'll stay for remainder of the class.
+What we've done instead is to "change directory" to go inside this folder in our terminal. This is where we'll work for remainder of the class.
 
 Now, let's make sure you really where you should be. Type in `$pwd` command and you should get the path back at you.:
 
@@ -319,7 +319,7 @@ Now we know that "Location_County" in "stacked.csv" matches "code" in the "count
 
 `$ csvjoin -c "Location_County,code" stacked.csv counties.csv > joined.csv`
 
-Let's break that down: We use "csvjoin" with the "-c" to pass in the column names "Location_County,code", which are the two columns from each file we are joining on. Make sure there is no space after the comma. Then we give it the two file names, in the same order as the column names. We then redirect theoutput to a file called "mixbev.csv".
+Let's break that down: We use "csvjoin" with the "-c" to pass in the column names "Location_County,code", which are the two columns from each file we are joining on. Make sure there is no space after the comma. Then we give it the two file names, in the same order as the column names. We then redirect the output to a file called "mixbev.csv".
 
 Peak at the columns names:
 
@@ -423,6 +423,8 @@ Now that we have our merged and joined file in "mixbev.csv", let's learn some mo
 
 This will take a couple of seconds to run.
 
+"csvstat" will give you basic information about the contents of each column in your data. It can help you learn about it, and can even give you some usable numbers for your story.
+
 This is just a part of the output:
 
 ```
@@ -447,7 +449,7 @@ This is just a part of the output:
 What can we learn from this?
 - The sum of all alcohol sales in the Austin MSA in December 2017 was $70,354,620.
 - The average was $57,385 and the median was $35,139. Though I'm not sure we would report those.
-- This highest Total_Reciepts value is "$869,818". We'll figure out who that is next.
+- This highest Total_Receipts value is "$869,818". We'll figure out who that is next.
 
 ### csvsort
 
@@ -457,9 +459,9 @@ Let's type in all in and run it, then break it down:
 
 `$ csvsort -c Total_Receipts -r mixbev.csv | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
-- "csvsort -c Total_Receipts -r" is our new command. "csvsort" is the command, and we are passing the "-c" flag and the name of a column to sort. The "-r" that follows says to reverse sort, so we have the largest number at the top. Journalists almost always want the largest number first. We have to do this first (or at least before our "head" command) so it considers the whole file.
+- "csvsort -c Total_Receipts -r" is our new command. "csvsort" is the command, and we are passing the "-c" flag and the name of a column to sort. The "-r" that follows says to reverse sort, so we have the largest number at the top. Journalists almost always want the largest number first. We have to do this step first (or at least before our "head" command) so it considers the whole file.
 - We pipe this into "csvcut" passing in our name, address, county and receipts fields. This is just for nice output of fields we actually care about.
-- We pass through to "head" to look at just the top 10 rows intead of all of them.
+- We pass through to "head" to look at just the top 10 rows instead of all of them.
 - We pass through to "csvlook" to make it pretty. I added the "--max-column-width 20" because some of the restaurant names are really long, and would break each row into multiple lines.
 
 So, our result is this:
@@ -483,21 +485,21 @@ A quick [Google Maps search](https://goo.gl/maps/TdsMbkd3Jjm) tells me "110 E 2N
 
 All of the results above are in Travis County, which includes Austin. What about sales in the suburban counties (Bastrop, Caldwell, Hays, Williamson)?
 
-We can use `csvgrep` to filter rows based on a pattern or regular expression. We'll use a pattern, and we'll start with Bastrop.
+We can use "csvgrep" to filter rows based on a pattern or regular expression. We'll use a pattern, and we'll start with Bastrop.
 
-We are basically using the same command as the last one (so you can arrow up to get that) and editing the beginning to include the `csvgrep` part. (Pro top: If you up arrow to get the last command, you can then use control-a to put your cursor at the beginning of the command):
+We are basically using the same command as the last one (so you can arrow up to get that) and editing the beginning to include the "csvgrep" part. (Pro top: If you up arrow to get the last command, you can then use control-a to put your cursor at the beginning of the command):
 
 `$ csvgrep -c county -m "Bastrop" mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
 Let's break down the csvgrep part of this:
 
 - "csvgrep" is the command.
-- "county" is the column we want to search, so we pass that argument in with `-c county`.
-- We are using a pattern match, which is the `-m`  flag, and then then the word or phrase we are searching. It could be more than one word, like "MAIN ST".
+- "county" is the column we want to search, so we pass that argument in with "-c county".
+- We are using a pattern match, which is the "-m"  flag, and then then the word or phrase we are searching. It could be more than one word, like "MAIN ST".
 - And of course the file we are searching.
 - The rest is the same as the previous command.
 
-To review all these commands in plain English, we are: Searching the mixbev.csv file by the county column for "Bastrop", then we sort on Total_Receipts in reverse order, then we cut for just the columnds we need (and name them), then we get the top 10 results, then we make them look pretty, limiting the width of columns to 20 characters. Got it?
+To review all these commands in plain English, we are: Searching the mixbev.csv file by the county column for "Bastrop", then we sort on Total_Receipts in reverse order, then we cut for just the columns we need (and name them), then we get the top 10 results, then we make them look pretty, limiting the width of columns to 20 characters. Got it?
 
 Now we have just Bastrop:
 
@@ -535,14 +537,17 @@ But let's look at the data in another way. What are the top sellers outside of t
 | TRATTORIA LI... | 13308 FM 150 W  | DRIFTWOOD     |        121,814 |
 ```
 
+We could write a sentence in our story like "Outside of Austin, the top alcohol sellers in the Austin MSA are the Hyatt Lost Pines resort, followed by the Chuy's restaurant chains in Cedar Park and Round Rock."
+
+
 ### csvsql - like peanut butter and chocolate
 
-The [csvsql](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html?highlight=query#csvsql-and-sql2csv-ultimate-power) can help you import and export your csv to and from database formats. But it will also do a simple query of the data itself using the sqlite package built into csvkt. This is more just to show you can do it. (I even get a lot of python errors, but the math is sound.)
+The [csvsql](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html?highlight=query#csvsql-and-sql2csv-ultimate-power) can help you import and export your csv to and from database formats. But it will also do a simple query of the data itself using the sqlite package built into csvkit. This is more just to show you can do it.
 
 Let's sum the total sold by county:
 
 ```
-$ csvsql --query "select county,sum(Total_Receipts) from mixbev group by 1;" mixbev.csv | csvlook
+$ csvsql --query "select county,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook
 | county     |      Total |
 | ---------- | ---------- |
 | Bastrop    |    720,659 |
@@ -599,7 +604,7 @@ $ csvsql --query "select Location_City,sum(Total_Receipts) as Total from mixbev 
 | WIMBERLEY        |     45,833 |
 ```
 
-## Things we won't do that's cool
+## Things we didn't do
 
 Believe it or not, we just scratched the surface of csvkit. The real power comes when you combine these functions together in scripts to do things you can't do by hand.
 
@@ -612,13 +617,14 @@ And much more.
 
 ## Setting up your computer
 
-At NICAR, the computers were set up for you. To run Python on your own computer, it makes sense to use a virtual environment, which is basically a sandbox where you can contain your Python code and not confuse your computer or other Python projects.
+At NICAR, the computers are set up for you. To run Python on your own computer, it makes sense to use a virtual environment, which is basically a sandbox where you can contain your Python code and not confuse your computer or other Python projects.
 
 - I recommend [conda](https://conda.io/docs/user-guide/install/index.html)
+- I have [basic untested directions here](install_miniconda.md).
 
 csvkit is a conda package, as is [agate](https://agate.rtfd.org), a related data analysis package.
 
 ## Running Python in a browser
 
-* We didn't get into here, but I like using Jupyter notebooks to run Python
-  - The is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter, which lets you run csvkit as if it were on the command line, but you don't have to do it one line at a time.
+* We didn't get into here, but I like using Jupyter notebooks to run Python projects.
+  - There is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter, which lets you run csvkit as if it were on the command line, but you don't have to do it one line at a time.
