@@ -76,17 +76,18 @@ Now we are going to change our working directory to where we need to be. Because
 
 Type this into your terminal:
 
-`$ cd /Users/nicar/Desktop/hands_on/csvkit-nicar2018/`
+`$ cd ~/Desktop/csvkit-nicar2018/`
 
-The first two segments find the logged in user, "nicar" in this case. If you were logged in as "nicar" and folder surfing on your computer, you would go to your Desktop, double-click on the "hands_on" folder, which would contain the "csvkit-nicar2018" folder, which you would then open.
 
-What we've done instead is to "change directory" to go inside this folder in our terminal. This is where we'll work for remainder of the class.
+The "~" takes you to the home directory of the logged in user. Then then we move into the /Desktop/ folder, then the "csvkit-nicar2018" folder. This is the same as if you went to your Desktop and then double-clicked on the "csvkit-nicar2018" folder.
 
-Now, let's make sure you really where you should be. Type in `$pwd` command and you should get the path back at you.:
+What we've done instead is to "change directory" to go inside this folder in your terminal. This is where we'll work for remainder of the class.
+
+Now, let's make sure you really where you should be. Type in `$ pwd` command and you should get the path back at you.:
 
 ```
 $ pwd
-/Users/nicar/Desktop/hands_on/csvkit-nicar2018/
+/Users/user_name/Desktop/csvkit-nicar2018/
 ```
 
 ### ls - list
