@@ -1,7 +1,7 @@
 Installing miniconda
 ====================
 
-This document assumes you are using a Mac. (If you are using a PC, perhaps first install [git for windows](https://git-scm.com/download/win) and then use the program Git Bash in place of Terminal references here.)
+This document assumes you are using a Mac. (If you are using a PC, see below.)
 
 In case you are coming across this outside of the CAR conference, you might need a little setup for your computer.
 
@@ -34,7 +34,7 @@ Once you are done, Quit your Terminal app and re-launch it.
 
 You've now installed Conda a command-line package manager for Python.
 
-## Create a package
+## Create an environment
 
 Hopefully that all went well, and you can do the following:
 
@@ -57,3 +57,54 @@ For PCs, it is just `activate nicar`, I think.
 You've now launched the "nicar" environment, which is a special Python sandbox that won't mess up the rest of your computer.
 
 Now you should be able to continue with [the lesson](README.md)
+
+## Installing miniconda on Windows
+
+- I suggest installing [git for Windows](https://gitforwindows.org/) first, so that you can use the "git bash" program, which allows you to use linux like shell commands on Windows.
+- Then install [Miniconda](https://conda.io/miniconda.html) for Windows. Use Python 3.6. If you have a newer computer, it's likely the 64-bit version, but use what you think is best.
+- During the miniconda install, you'll get a prompt asking if you want to "Add Anaconda to my PATH environment variable". **YES, check this box**.
+
+![Add to path](images/anaconda-prompt.png)
+
+- If you do that, once installed, you should be able to launch a new "git bash" prompt and type `where python` and get a return like this:
+
+```
+$ where python
+C:\Users\CMcdonald\AppData\Local\Continuum\miniconda3\python.exe
+```
+
+### If that doesn't work
+
+You might have to add Python to the path yourself.
+
+- Open the Anaconda Prompt and type in `where python` and the `where conda`.
+
+```
+(base) C:\Users\CMcdonald>where python
+C:\Users\CMcdonald\AppData\Local\Continuum\miniconda3\python.exe
+
+(base) C:\Users\CMcdonald>where conda
+C:\Users\CMcdonald\AppData\Local\Continuum\miniconda3\Library\bin\conda.bat
+C:\Users\CMcdonald\AppData\Local\Continuum\miniconda3\Scripts\conda.exe
+```
+
+You'll need the path before "python.exe" and the one before "conda.exe" in the next steop.
+
+- Open a regular CMD prompt and enter this:
+
+```
+$ SETX PATH "%PATH%;C:\Users\CMcdonald\AppData\Local\Continuum\miniconda3;C:\Users\CMcdonald\AppData\Local\Continuum\miniconda3\Scripts"
+```
+and hit return and you should get:
+
+```
+SUCCESS: Specified value was saved.
+```
+
+- Now, open a new Git Bash prompt and type in `where python`, and you should get a good response with the path.
+
+Now you can go back up to the "Create an environment" section and go from there.
+
+---
+
+The above bit on Windows was drawn from [this article](https://medium.com/@GalarnykMichael/install-python-on-windows-anaconda-c63c7c3d1444) and some personal experience.
