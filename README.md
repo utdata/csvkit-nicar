@@ -7,7 +7,7 @@ This session is good for: People who want a solution for working with multipleâ€
 
 Created b [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
 
-This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6, which is now the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
+This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
 
 ## Our scenario
 
@@ -228,7 +228,7 @@ Do that, and it will stack all the text and print it to your screen. Not particu
 
 - Do `$ ls` to see that "stacked.csv" was created.
 - Do `$ wc -l 227.csv` to see how many lines were in the "227" file.
-- Do `$ wc -l stacked.csv` to see that the "stacked" file has more.
+- Do `$ wc -l stacked.csv` to see that the "stacked" file has more: 1227 lines.
 
 Congrats, you just merged five files into one with a single command!
 
@@ -345,7 +345,7 @@ At the bottom of the file we have the Williamson county name:
 | TUSK GRILL                                         | Williamson |
 ```
 
-Congratulations, you've joined to files together without creating a database.
+Congratulations, you've joined two files together without creating a database.
 
 ### csvcut -c for ranges
 
@@ -486,7 +486,7 @@ A quick [Google Maps search](https://goo.gl/maps/TdsMbkd3Jjm) tells me "110 E 2N
 
 All of the results above are in Travis County, which includes Austin. What about sales in the suburban counties (Bastrop, Caldwell, Hays, Williamson)?
 
-We can use "csvgrep" to filter rows based on a pattern or regular expression. We'll use a pattern, and we'll start with Bastrop.
+We can use [csvgrep](http://csvkit.readthedocs.io/en/1.0.2/tutorial/2_examining_the_data.html#csvgrep-find-the-data-you-need) to filter rows based on a pattern or regular expression. We'll use a pattern, and we'll start with Bastrop.
 
 We are basically using the same command as the last one (so you can arrow up to get that) and editing the beginning to include the "csvgrep" part. (Pro top: If you up arrow to get the last command, you can then use control-a to put your cursor at the beginning of the command):
 
@@ -545,7 +545,7 @@ We could write a sentence in our story like "Outside of Austin, the top alcohol 
 
 The [csvsql](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html?highlight=query#csvsql-and-sql2csv-ultimate-power) can help you import and export your csv to and from database formats. But it will also do a simple query of the data itself using the sqlite package built into csvkit. This is more just to show you can do it.
 
-Let's sum the total sold by county:
+Let's sum the Receipt Totals sold by county:
 
 ```
 $ csvsql --query "select county,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook
