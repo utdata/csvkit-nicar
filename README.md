@@ -33,13 +33,13 @@ We'll use the command-line tool [csvkit](https://csvkit.readthedocs.io) to solve
 
 ## Getting around the terminal
 
-For those unfamiliar with "the command line", Terminal is an application that uses a "Command Line Interface" (cli) to communicate with your computer. The language it is using is called Bash, even though the tool we mostly using, csvkit, is built in Python.
+For those unfamiliar with "the command line", Terminal is an application that uses a "Command Line Interface" (cli) to communicate with your computer. The language it is using is called Bash, even though the tool we are mostly using, csvkit, is written in Python.
 
 Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the computer. It'll be ok.
 
 ### About commands in this lesson
 
-These directions are written in a syntax called Markdown. It looks pretty when we look at it on [github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md, but it might be confusing if you are looking at the README.md file in a text editor, and aren't familiar with Markdown.
+These directions are written in a syntax called Markdown. It looks pretty when we [look at it on github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md, but it might be confusing if you are looking at the README.md file in a text editor, and aren't familiar with Markdown.
 
 - Code blocks are enclosed in backtick marks. This makes them stand out on Gitub. The backticks are not part of the command.
 - To designate the input you type in vs output the computer spits out, I will use the `$` at the beginning to show you to type it in. But DON'T TYPE IN THE `$`. Or the backtick marks.
@@ -93,7 +93,7 @@ What we've done is "change directory" to go inside this folder in your terminal.
 
 This is the command-line version of going to your Desktop, double-clicking on the "hands-on" folder, then again on the "rest_of_path" folder.
 
-Now, let's make sure you really are where you should be. Type in `$ pwd` command and you should get the path back at you:
+Now, let's make sure you really are where you should be. Use the `$ pwd` command and you should get are return similar to this:
 
 ```
 $ pwd
@@ -102,16 +102,17 @@ $ pwd
 
 ### ls - list
 
-Now let's set what is inside this folder. Type this into your terminal:
+Now let's set what is inside this folder. Execute this command in your terminal:
 
 `$ ls`
 
 You should get in return something like this:
 
 ``` txt
-105.csv                   246.csv                   README.md
-11.csv                    28.csv                    counties.csv
-227.csv                   Mixed_Beverage_Layout.pdf
+05.csv                   28.csv                    images
+11.csv                    Mixed_Beverage_Layout.pdf install_miniconda.md
+227.csv                   README.md
+246.csv                   counties.csv
 ```
 
 This lists all the files in the folder, but perhaps in multiple columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
@@ -123,15 +124,17 @@ Many cli tools like `ls` take an argument, or flag, that changes or extends the 
 You should get something like:
 
 ``` txt
-total 616
--rw-r--r--@ 1 christian  staff   20730 Jan 26 23:54 105.csv
--rw-r--r--@ 1 christian  staff    5066 Jan 26 23:54 11.csv
--rw-r--r--@ 1 christian  staff  184491 Jan 26 23:55 227.csv
--rw-r--r--@ 1 christian  staff   40543 Jan 26 23:55 246.csv
--rw-r--r--@ 1 christian  staff    1717 Jan 28 14:06 28.csv
--rw-r--r--@ 1 christian  staff   28583 Jan 26 21:55 Mixed_Beverage_Layout.pdf
--rw-r--r--  1 christian  staff    6152 Jan 28 14:59 README.md
--rw-r--r--@ 1 christian  staff    3886 Jan 26 22:33 counties.csv
+total 664
+-rw-r--r--  1 christian  staff   20730 Mar  9 23:27 105.csv
+-rw-r--r--  1 christian  staff    5066 Mar  9 23:27 11.csv
+-rw-r--r--  1 christian  staff  184491 Mar  9 23:27 227.csv
+-rw-r--r--  1 christian  staff   40543 Mar  9 23:27 246.csv
+-rw-r--r--  1 christian  staff    1717 Mar  9 23:27 28.csv
+-rw-r--r--  1 christian  staff   28583 Mar  9 23:27 Mixed_Beverage_Layout.pdf
+-rw-r--r--  1 christian  staff   29075 Mar 10 07:43 README.md
+-rw-r--r--  1 christian  staff    3886 Mar  9 23:27 counties.csv
+drwxr-xr-x  3 christian  staff     102 Mar  9 23:27 images
+-rw-r--r--  1 christian  staff    4576 Mar  9 23:27 install_miniconda.md
 ```
 
 This is the "long" listing that includes file permissions, owners, size, date, etc.
@@ -181,7 +184,7 @@ Now we'll concentrate the power of csvkit. If you want more information on any o
 
 ### csvcut -n
 
-[csvcut](https://csvkit.readthedocs.io/en/1.0.2/tutorial/1_getting_started.html#csvcut-data-scalpel) allows you to select, delete and reorder the columns in your CSV.
+[csvcut](https://csvkit.readthedocs.io/en/1.0.2/tutorial/1_getting_started.html#csvcut-data-scalpel) allows you to select, delete and reorder the columns by name or position.
 
 It also has a special flag "-n" to get the header names. Let's use:
 
