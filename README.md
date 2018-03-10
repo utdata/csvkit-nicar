@@ -1,13 +1,13 @@
 Csvkit, a command-line tool for reporters
 =========================================
 
-## This page available at: g.cmcdonald.com/csvkit-nicar2018 
+## These directions are at: g.cmcdonald.com/csvkit-nicar2018 
 
 Ever struggled with large data sets? Or need to quickly join or merge data sets without benefit of a database? We will show you how to harness the awesome power of CSVKit to wrangle large datasets on the command line. It's easy to use, fast and powerful. It's a must in every data journalist's tool box.
  
 This session is good for: People who want a solution for working with multiple​​ CSV files without having to open Excel or to join or merge files without a database.
 
-Created b [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
+Created by [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
 
 This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
 
@@ -46,21 +46,12 @@ These directions are written in a syntax called Markdown. It looks pretty when w
 
 So, if `$ ls -l` is the command. Type just "ls -l" and then hit return.
 
-and this is the  output:
-
-```
-105.csv                   28.csv                   
-11.csv                    Mixed_Beverage_Layout.pdf
-227.csv                   README.md
-246.csv                   counties.csv
-```
-
 ### Launch the Terminal app
 
 - It may be in the applications bar: A black box with `>_` inside it.
 - Or you can click on the rocket-looking Launcher app in the applications bar and type in Terminal and then select it.
 - Or, you can type command-space to get a search bar, and type in Terminal. Hit return.
-- Or, you can look in the Applications folder, then inside the Utilities folder
+- Or, you can look in the Applications folder, then inside the Utilities folder.
 
 If you find the type is really small, you can to "command +" to make it bigger.
 
@@ -70,26 +61,43 @@ Type `$ pwd` in terminal, and it will respond with something like:
 
 `/Users/username/`
 
-This command is useful because it can get confusing about where you are on the computer. Each of those "/" designates a folder, and they are the same ones that you normally browse through on your computer.
+This command is useful because it can get confusing about where you are on the computer when using Terminal. Each of those "/" designates a folder, and they are the same ones that you normally browse through on your computer.
 
 ### cd - change directory
 
-Now we are going to change our working directory to where we need to be. Because this is being written before the computers were built for the conference, the instructor will correct this for you in class. But let's pretend we know where we are going.
+Now we are going to change our working directory to where we need to be. 
+
+Because this is being written before the computers were built for the conference, we might need to make some adjustments in class.
+
+Before we do this, let me tell you about tab completion. When in the terminal, you often don't have to type in entire names of files or folders. You can type the beginning of a file name, then hit "tab" to complete the rest. It saves you a lot of typing (and mistyping), especially when you have long directory names. We'll do this now:
 
 Type this into your terminal:
 
-`$ cd ~/Desktop/csvkit-nicar2018/`
+`$ cd ~/Desk` and then hit tab on your keyboard. It should complete to:
 
+`$ cd ~/Desktop`
 
-The "~" takes you to the home directory of the logged in user. Then then we move into the /Desktop/ folder, then the "csvkit-nicar2018" folder. This is the same as if you went to your Desktop and then double-clicked on the "csvkit-nicar2018" folder.
+The "~" takes you to the home directory of the logged in user. Then when we typed in `Desk` and hit tab, it completed the name of the only folder that matched the word, `Desktop`.
 
-What we've done instead is to "change directory" to go inside this folder in your terminal. This is where we'll work for remainder of the class.
+But, wait; there's more: Continue by adding `hand` to the end and then tab:
 
-Now, let's make sure you really where you should be. Type in `$ pwd` command and you should get the path back at you.:
+`$ cd ~/Desktop/hands-on`
+
+And finally add `rest_` (I'm not sure yet) and hit tab.
+
+`$ cd ~/Desktop/hands-on/rest_of_path`
+
+Then hit return.
+
+What we've done is "change directory" to go inside this folder in your terminal. This is where we'll work for remainder of the class.
+
+This is the command-line version of going to your Desktop, double-clicking on the "hands-on" folder, then again on the "rest_of_path" folder.
+
+Now, let's make sure you really are where you should be. Type in `$ pwd` command and you should get the path back at you:
 
 ```
 $ pwd
-/Users/user_name/Desktop/csvkit-nicar2018/
+/Users/Username/Desktop/hands-on/rest_of_path/
 ```
 
 ### ls - list
@@ -130,8 +138,6 @@ This is the "long" listing that includes file permissions, owners, size, date, e
 
 ### wc - word count
 
-Before we use the "wc" command, let me tell you about tab completion. When in the terminal, you often don't have to type in entire names of files or folders. You type the beginning of a file name, then hit "tab" to complete the rest. Try it with the 11.csv file.
-
 Type in `$ wc 11` then hit tab. It should finish it out as:
 
 `$ wc 11.csv`
@@ -142,9 +148,9 @@ Hit return and you get back:
       25     285    5066 11.csv
 ```
 
-- "25" is the number of lines
-- "285" is the number of words
-- "5006" is the number of bytes
+- "25" is the number of lines in the file
+- "285" is the number of words in the file
+- "5006" is the number of bytes in the file
 
 We'll use this with the `-l` flag to see just the number of lines in files.
 
@@ -155,11 +161,11 @@ $ wc -l 11.csv
 
 ### head
 
-Now we know there are 25 lines in this file, let's look at a little of it.
+Now we know there are 25 lines in this file, let's look at the top of the file.
 
 `$ head 11.csv`
 
-(Don't forget tab complete!)
+(Use your tab complete!)
 
 Hit return, and you'll see the first 10 lines of the "11.csv" file run across your screen.
 
@@ -167,7 +173,7 @@ Scroll back and look at the top of this return, and you can see the headers, but
 
 ### More terminal
 
-This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a work-in-progress [cli-tools](https://github.com/utdata/cli-tools) lesson if you want further study later.
+This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a work-in-progress lesson [cli-tools](https://github.com/utdata/cli-tools) if you want further study later.
 
 ## csvkit
 
@@ -388,7 +394,7 @@ We get this:
  26: code
 ```
 
-Note the numbered columns. We really only need the Location_, Receipts_ and county column. Let's create a new file with just those columns, which we can do based those column numbers. You can pick and choose rows by number, and/or string ranges together with a hyphen.
+Note the numbered columns. We really only need the Location_, Receipts_ and county column. Let's create a new file with just those columns, which we can do based on those column numbers. You can pick and choose rows by number, and/or string ranges together with a hyphen.
 
 `$ csvcut -c 9-14,20-22,24-25 joined.csv > mixbev.csv`
 
@@ -482,7 +488,7 @@ So, our result is this:
 | KUNG FU SALOON       | 11501 ROCK ROSE A... | Travis |        411,707 |
 ```
 
-A quick [Google Maps search](https://goo.gl/maps/TdsMbkd3Jjm) tells me "110 E 2ND ST" is the J.W. Marriott hotel in downtown Austin. I can tell you they have lead alcohol sales in the city of Austin each month since they opened in February 2015.
+A quick [Google Maps search](https://goo.gl/maps/TdsMbkd3Jjm) tells me "110 E 2ND ST" is the J.W. Marriott hotel in downtown Austin. I can tell you they have led alcohol sales in the city of Austin each month since they opened in February 2015.
 
 ### csvgrep - filter rows of data through matching
 
@@ -490,7 +496,7 @@ All of the results above are in Travis County, which includes Austin. What about
 
 We can use [csvgrep](http://csvkit.readthedocs.io/en/1.0.2/tutorial/2_examining_the_data.html#csvgrep-find-the-data-you-need) to filter rows based on a pattern or regular expression. We'll use a pattern, and we'll start with Bastrop.
 
-We are basically using the same command as the last one (so you can arrow up to get that) and editing the beginning to include the "csvgrep" part. (Pro top: If you up arrow to get the last command, you can then use control-a to put your cursor at the beginning of the command):
+We are basically using the same command as the last one (so you can arrow up to get that) and editing the beginning to include the "csvgrep" part. (Pro tip: After you arrow up to get the last command, you can then use control-a to put your cursor at the beginning of the command):
 
 `$ csvgrep -c county -m "Bastrop" mixbev.csv | csvsort -c Total_Receipts -r | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
