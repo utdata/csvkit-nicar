@@ -100,24 +100,28 @@ $ pwd
 
 ### mv - move or rename a file
 
-That last folder is super long, and make everything else harder to see, so we are going to fix that:
+That last folder name is super long, and makes everything else harder to see, so we are going to fix that:
 
 Do this:
 
 `$ cd ../`
 
-Which will move you one directory up, so we are in the `hands_on_classes` folder.
+Which will move you one directory up, so we are inside the `hands_on_classes` folder.
 
-Type `mv C` then tab to complete that path, then add space then `csvkit` at the end: 
+Type `mv C` then tab to complete that path, then add a space and then `csvkit` at the end. Like this: 
 
 `$ mv Csvkit_a_command_line_tool_for_reporters_1160 csvkit`
 
-We renamed our folder to a much shorter name. Now we need to go back inside it:
+Hit return and we've renamed our folder to a much shorter name. Now we need to go back inside it:
 
 `$ cd csvkit`
 
-and maybe do `$ pwd` to make sure you are in the right place, inside the csvkit folder.
+and maybe do pwd again to make sure you are in the right place, inside the csvkit folder:
 
+```$ pwd
+/Users/christian/Desktop/hands_on_classes/csvkit
+```
+ 
 ### ls - list
 
 Now let's set what is inside this folder. Execute this command in your terminal:
