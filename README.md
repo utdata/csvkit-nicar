@@ -133,9 +133,9 @@ You should get in return something like this:
 
 ``` txt
 05.csv                   28.csv                    images
-11.csv                    Mixed_Beverage_Layout.pdf install_miniconda.md
-227.csv                   README.md
-246.csv                   counties.csv
+11.csv                   Mixed_Beverage_Layout.pdf install_miniconda.md
+227.csv                  README.md
+246.csv                  counties.csv
 ```
 
 This lists all the files in the folder, but perhaps in multiple columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
