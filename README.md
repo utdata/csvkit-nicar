@@ -118,7 +118,8 @@ Hit return and we've renamed our folder to a much shorter name. Now we need to g
 
 and maybe do pwd again to make sure you are in the right place, inside the csvkit folder:
 
-```$ pwd
+```
+$ pwd
 /Users/christian/Desktop/hands_on_classes/csvkit
 ```
  
