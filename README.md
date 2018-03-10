@@ -40,7 +40,7 @@ Confused? Don't worry about it ... you'll do fine. And no, you won't destroy the
 
 ### About commands in this lesson
 
-These directions are written in a syntax called Markdown. It looks pretty when we [look at it on github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md, but it might be confusing if you are looking at the README.md file in a text editor, and aren't familiar with Markdown.
+These directions are written in a syntax called Markdown. It looks pretty when we [look at it on github](https://github.com/utdata/csvkit-nicar2018/blob/master/README.md), but it might be confusing if you are looking at the README.md file in a text editor, and aren't familiar with Markdown.
 
 - Code blocks are enclosed in backtick marks. This makes them stand out on Gitub. The backticks are not part of the command.
 - To designate the input you type in vs output the computer spits out, I will use the `$` at the beginning to show you to type it in. But DON'T TYPE IN THE `$`. Or the backtick marks.
