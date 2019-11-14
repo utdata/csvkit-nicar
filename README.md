@@ -5,12 +5,14 @@ Csvkit, a command-line tool for reporters
 ## https://g.cmcdonald.com/csvkit-nicar2018 
 
 Ever struggled with large data sets? Or need to quickly join or merge data sets without benefit of a database? We will show you how to harness the awesome power of CSVKit to wrangle large datasets on the command line. It's easy to use, fast and powerful. It's a must in every data journalist's tool box.
- 
+
 This session is good for: People who want a solution for working with multiple​​ CSV files without having to open Excel or to join or merge files without a database.
 
-Created by [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
+Originally created by [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
 
-This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.6, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
+This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.7, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
+
+In addition, if you are not on a NICAR machine, you will need the data. I recommend you download this repo, which will give you these directions as well as all the data. You will have to adjust directory path names from the instructions below since you folder structure won't the the same.
 
 ## Our scenario
 
