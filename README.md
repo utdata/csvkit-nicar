@@ -1,22 +1,20 @@
-Csvkit, a command-line tool for reporters
-=========================================
+# Csvkit, a command-line tool for reporters
 
-## These directions are at:
-## https://g.cmcdonald.com/csvkit-nicar2018 
+## These directions are at: <https://g.cmcdonald.com/csvkit-nicar2018>
 
 Ever struggled with large data sets? Or need to quickly join or merge data sets without benefit of a database? We will show you how to harness the awesome power of CSVKit to wrangle large datasets on the command line. It's easy to use, fast and powerful. It's a must in every data journalist's tool box.
 
 This session is good for: People who want a solution for working with multiple​​ CSV files without having to open Excel or to join or merge files without a database.
 
-Originally created by [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) on March 8-11, 2018 in Chicago.
+Originally created by [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) in Chicago and updated for [2020 CAR Conference](https://www.ire.org/events-and-training/conferences/nicar-2020) in New Orleans.
 
-This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.7, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md).
+This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.8, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md) or a python environment of your choice. Or follow the [csvkit instructions to install globally](https://csvkit.readthedocs.io/en/1.0.3/tutorial/1_getting_started.html#installing-csvkit).
 
 In addition, if you are not on a NICAR machine, you will need the data. I recommend you download this repo, which will give you these directions as well as all the data. You will have to adjust directory path names from the instructions below since you folder structure won't the the same.
 
 ## Our scenario
 
-We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) for five different counties that make up the Austin-Round Rock, TX Metropolitan Statistical Area. The data covers the December 2017 reporting period.
+We have CSV files of [Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) for five different counties that make up the Austin-Round Rock, TX Metropolitan Statistical Area. The data covers a one-month reporting period.
 
 We want to write a story that illustrates the top alcohol sellers in each of the five counties, and some summaries for the area as a whole. But there are two catches: We have five files instead of one, and the county name is not in the file. We do, however, have a lookup table to match county ID with a name.
 
@@ -84,55 +82,32 @@ But, wait; there's more: Continue by adding `hands_` to the end and then tab:
 
 `$ cd ~/Desktop/hands_`
 
-And finally add `Csvkit` and hit tab.
+Which will fill out `hands_on_classes/`. And finally add `csvkit` and hit tab.
 
-`$ cd ~/Desktop/hands_on_classes/Csvkit_a_command_line_tool_for_reporters_1160`
+`$ cd ~/Desktop/hands_on_classes/csvkit_a_command_line_tool_for_reporters_1160`
+
+> The path above will be a little different as the class name and ID are updated for 2020.
 
 Then hit return.
 
 What we've done is "change directory" to go inside this folder in your terminal. This is where we'll work for remainder of the class.
 
-This is the command-line version of going to your Desktop, double-clicking on the "hands_on_classes" folder, then again on the "Csvkit_a_command_line_tool_for_reporters_1160" folder.
+This is the command-line version of going to your Desktop, double-clicking on the "hands_on_classes" folder, then again on the "csvkit_a_command_line_tool_for_reporters_1160" folder.
 
 Now, let's make sure you really are where you should be. Use the `$ pwd` command and you should get are return similar to this:
 
 ```
 $ pwd
-/Users/Username/Desktop/hands_on_classes/Csvkit_a_command_line_tool_for_reporters_1160/
+/Users/Username/Desktop/hands_on_classes/csvkit_a_command_line_tool_for_reporters_1160/
 ```
 
-### mv - move or rename a file
-
-That last folder name is super long, and makes everything else harder to see, so we are going to fix that:
-
-Do this:
-
-`$ cd ../`
-
-Which will move you one directory up, so we are inside the `hands_on_classes` folder.
-
-Type `mv C` then tab to complete that path, then add a space and then `csvkit` at the end. Like this: 
-
-`$ mv Csvkit_a_command_line_tool_for_reporters_1160 csvkit`
-
-Hit return and we've renamed our folder to a much shorter name. Now we need to go back inside it:
-
-`$ cd csvkit`
-
-and maybe do pwd again to make sure you are in the right place, inside the csvkit folder:
-
-```
-$ pwd
-/Users/christian/Desktop/hands_on_classes/csvkit
-```
- 
 ### ls - list
 
 Now let's set what is inside this folder. Execute this command in your terminal:
 
 `$ ls`
 
-You should get in return something like this:
+You should get a return something like this:
 
 ``` txt
 05.csv                   28.csv                    images
@@ -183,7 +158,7 @@ Hit return and you get back:
 
 We'll use this with the `-l` flag to see just the number of lines in files.
 
-```
+``` bash
 $ wc -l 11.csv
       25 11.csv
 ```
@@ -202,11 +177,11 @@ Scroll back and look at the top of this return, and you can see the headers, but
 
 ### More terminal
 
-This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a work-in-progress lesson [cli-tools](https://github.com/utdata/cli-tools) if you want further study later.
+This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a  [cli-tools lesson](https://github.com/utdata/cli-tools) if you want further study later.
 
 ## csvkit
 
-Now we'll concentrate the power of csvkit. If you want more information on any of the commands we use, read the documentation at https://csvkit.rtfd.org.
+Now we'll concentrate the power of csvkit. If you want more information on any of the commands we use, read the documentation at <https://csvkit.rtfd.org.>
 
 ### csvcut -n
 
@@ -218,7 +193,7 @@ It also has a special flag "-n" to get the header names. Let's use:
 
 We get:
 
-``` text
+``` txt
   1: Taxpayer_Number
   2: Taxpayer_Name
   3: Taxpayer_Address
@@ -255,7 +230,7 @@ In the interest of time, take my word for it and know that all five numbered fil
 
 We want to combine all the files into a single new file before we join with another file to get the county names.
 
-The command [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) merges like files on top of each other, or "stacks" them. At its most basic, you just feed it filenames. 
+The command [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) merges like files on top of each other, or "stacks" them. At its most basic, you just feed it filenames.
 
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv`
 
@@ -273,7 +248,7 @@ NOTEWORTHY: If these files were named by their counties, like "bastrop.csv", you
 
 ### redirecting commands, csvcut -c and csvlook
 
-Now that we have our one 1127-line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`. In fact, we'll chain many commands together like this. That's what we'll work through here.
+Now that we have our one 1,227-line file, it might make sense to just look at the top when we want to explore it. Above you redirected output with "csvstack" into another file using `>`, but we can also redirect output into another command using `|`. In fact, we'll chain many commands together like this. That's what we'll work through here.
 
 - start with `$ head stacked.csv` to see the first 10 lines.
 
@@ -330,7 +305,7 @@ Before we talk about csvjoin, let's take a quick peek at the "counties.csv" file
 
 gives you this:
 
-```
+``` txt
 | id | county    | code |
 | -- | --------- | ---- |
 |  1 | Anderson  |    1 |
@@ -365,7 +340,7 @@ Peak at the columns names:
 
 We've added two columns at the end:
 
-```
+``` txt
  25: county
  26: code
 ```
@@ -394,7 +369,7 @@ If we look at all the column names:
 
 We get this:
 
-```
+``` txt
   1: Taxpayer_Number
   2: Taxpayer_Name
   3: Taxpayer_Address
@@ -429,8 +404,11 @@ Note the numbered columns. We really only need the Location_, Receipts_ and coun
 
 That created our new file "mixbev.csv". Peek at the columns:
 
-```
-$ csvcut -n mixbev.csv 
+`$ csvcut -n mixbev.csv`
+
+and you get this:
+
+``` txt
   1: Location_Name
   2: Location_Address
   3: Location_City
@@ -447,7 +425,7 @@ $ csvcut -n mixbev.csv
 
 ## Value of what you've learned so far
 
-Those two major functions above, [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) and [csvjoin](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvjoin-merging-related-data), can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet. I once [wrote a script](https://github.com/utdata/cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets to combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
+Those two major functions above, [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvstack-combining-subsets) and [csvjoin](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvjoin-merging-related-data), can often be done in csvkit much quicker, easier and more precisely than in Excel. Especially when you have a spreadsheet with more than one sheet. I once [wrote a script](https://github.com/utdata/rwd-cli-tools/blob/master/lectures/csvkit/APD%20Demographics%20data%20pipeline.ipynb) to rip apart a dozen Excel files that each had eight sheets to combine them into one file. I never would've been able to copy/paste 96 sheets together without making an error. The script takes about 30 seconds to run.
 
 There, you've gotten value from this class.
 
@@ -465,7 +443,7 @@ This will take a couple of seconds to run.
 
 This is just a part of the output:
 
-```
+``` txt
 10. "Total_Receipts"
 
   Type of data:          Number
@@ -485,6 +463,7 @@ This is just a part of the output:
 ```
 
 What can we learn from this?
+
 - The sum of all alcohol sales in the Austin MSA in December 2017 was $70,354,620.
 - The average was $57,385 and the median was $35,139. Though I'm not sure we would report those.
 - This highest Total_Receipts value is "$869,818". We'll figure out who that is next.
@@ -584,8 +563,11 @@ The [csvsql](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html?h
 
 Let's sum the Receipt Totals sold by county:
 
-```
-$ csvsql --query "select county,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook
+`$ csvsql --query "select county,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook`
+
+Yields this result:
+
+``` txt
 | county     |      Total |
 | ---------- | ---------- |
 | Bastrop    |    720,659 |
@@ -593,13 +575,15 @@ $ csvsql --query "select county,sum(Total_Receipts) as Total from mixbev group b
 | Hays       |  3,274,053 |
 | Travis     | 59,526,973 |
 | Williamson |  6,769,529 |
-
 ```
 
 or by city:
 
-```
-$ csvsql --query "select Location_City,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook
+`$ csvsql --query "select Location_City,sum(Total_Receipts) as Total from mixbev group by 1;" mixbev.csv | csvlook`
+
+Begets this:
+
+``` txt
 | Location_City    |      Total |
 | ---------------- | ---------- |
 | AUSTIN           | 58,165,637 |
@@ -648,22 +632,18 @@ Believe it or not, we just scratched the surface of csvkit. The real power comes
 
 Some other uses we didn't really talk about:
 
-- You can turn an Excel spreadsheet into a csv with [in2csv](https://csvkit.readthedocs.io/en/1.0.2/tutorial/1_getting_started.html#in2csv-the-excel-killer)
-- You can normalize files with [csvclean](http://csvkit.readthedocs.io/en/1.0.2/scripts/csvclean.html).
+- You can turn an Excel spreadsheet into a csv with [in2csv](https://csvkit.readthedocs.io/en/latest/tutorial/1_getting_started.html#in2csv-the-excel-killer)
+- You can normalize files with [csvclean](https://csvkit.readthedocs.io/en/latest/scripts/csvclean.html).
 
 And much more.
 
 ## Setting up your computer
 
-At NICAR, the computers are set up for you. To run Python on your own computer, it makes sense to use a virtual environment, which is basically a sandbox where you can contain your Python code and not confuse your computer or other Python projects.
+At NICAR, the computers are set up for you. To run Python on your own computer, it is recommended you use a virtual environment, which is basically a sandbox where you can contain your Python code and not confuse your computer or other Python projects.
 
-- I recommend [conda](https://conda.io/docs/user-guide/install/index.html)
-- I have [basic untested directions here](install_miniconda.md).
-
-csvkit is a conda package, as is [agate](https://agate.rtfd.org), a related data analysis package.
+- I like [conda](https://conda.io/en/latest/) and I have basic directions to [install Miniconda here](install_miniconda.md). csvkit is a conda package, as is [agate](https://agate.rtfd.org), a related data analysis package.
+- [pipenv](https://pipenv.readthedocs.io/en/latest/) is what is used on IRE computers and is a good choice. There are others.
 
 ## Running Python in a browser
 
-* We didn't get into here, but I like using Jupyter notebooks to run Python projects.
-  - There is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter, which lets you run csvkit as if it were on the command line, but you don't have to do it one line at a time.
-
+We didn't get into here, but I like using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) to run Python projects. There is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter, which lets you run csvkit as if it were on the command line, but you don't have to do it one line at a time. That code is from 2017, so your milage may vary.

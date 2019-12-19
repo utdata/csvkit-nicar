@@ -11,9 +11,9 @@ My preferred way is to us an environment manager called [conda](https://conda.io
 
 ## Install miniconda
 
-We are using [miniconda](https://conda.io/miniconda.html) because it is faster to install than the full [Anaconda](https://conda.io/docs/user-guide/install/macos.html) package.
+We are using [miniconda](https://docs.conda.io/en/latest/miniconda.html) because it is faster to install than the full Anaconda package.
 
-- Go to the [miniconda](https://conda.io/miniconda.html) install page.
+- Go to the [miniconda](https://docs.conda.io/en/latest/miniconda.html) install page.
 - For MacOS, the **pkg** version is probably easiest to use. Just download and double-click. (If you are using the **bash** version, then follow their directions.)
 
 ## Create an environment
