@@ -118,7 +118,9 @@ You should get a return something like this:
 
 This lists all the files in the folder, but perhaps in multiple columns. There are five .csv files that start with numbers, one called counties.csv, a pdf and this README.md file.
 
-Many cli tools like `ls` take an argument, or flag, that changes or extends the behavior of the command. Try:
+Many cli tools like `ls` take an argument, or flag, that changes or extends the behavior of the command. A flag is applied after a command to modify it in some way. It is entered with a dash and then the letter that works for the flag.
+
+Try this:
 
 `$ ls -l`
 
@@ -177,11 +179,11 @@ Scroll back and look at the top of this return, and you can see the headers, but
 
 ### More terminal
 
-This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a  [cli-tools lesson](https://github.com/utdata/cli-tools) if you want further study later.
+This is all the bash/terminal basics we'll cover, because csvkit is our focus. I do have a  [cli-tools lesson](https://github.com/utdata/cli-tools) if you want to learn more later.
 
 ## csvkit
 
-Now we'll concentrate the power of csvkit. If you want more information on any of the commands we use, read the documentation at <https://csvkit.readthedocs.io.>
+Now we'll concentrate the power of csvkit. If you want more information on any of the commands or flags we use, read the documentation at <https://csvkit.readthedocs.io.>
 
 ### csvcut -n
 
