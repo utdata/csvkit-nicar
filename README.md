@@ -1,6 +1,6 @@
 # Csvkit, a command-line tool for reporters
 
-## These directions are at: <https://g.cmcdonald.com/csvkit-nicar2018>
+## These directions are at: <https://g.cmcdonald.com/csvkit-nicar>
 
 Ever struggled with large data sets? Or need to quickly join or merge data sets without benefit of a database? We will show you how to harness the awesome power of CSVKit to wrangle large datasets on the command line. It's easy to use, fast and powerful. It's a must in every data journalist's tool box.
 
