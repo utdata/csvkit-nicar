@@ -181,7 +181,7 @@ This is all the bash/terminal basics we'll cover, because csvkit is our focus. I
 
 ## csvkit
 
-Now we'll concentrate the power of csvkit. If you want more information on any of the commands we use, read the documentation at <https://csvkit.rtfd.org.>
+Now we'll concentrate the power of csvkit. If you want more information on any of the commands we use, read the documentation at <https://csvkit.readthedocs.io.>
 
 ### csvcut -n
 
@@ -235,6 +235,8 @@ The command [csvstack](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_to
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv`
 
 Do that, and it will stack all the text and print it to your screen. Not particularly useful. What we need to do is redirect the output to a file instead of our screen, which we do with the ">" command. Let's call our files "stacked.csv":
+
+> Pro tip: You can use the up arrow in your Terminal to get your last command, and then edit it into a new command.
 
 `$ csvstack 11.csv 28.csv 105.csv 227.csv 246.csv > stacked.csv`
 
@@ -332,7 +334,7 @@ Now we know that "Location_County" in "stacked.csv" matches "code" in the "count
 
 `$ csvjoin -c "Location_County,code" stacked.csv counties.csv > joined.csv`
 
-Let's break that down: We use "csvjoin" with the "-c" to pass in the column names "Location_County,code", which are the two columns from each file we are joining on. Make sure there is no space after the comma. Then we give it the two file names, in the same order as the column names. We then redirect the output to a file called "mixbev.csv".
+Let's break that down: We use "csvjoin" with the "-c" to pass in the column names "Location_County,code", which are the two columns from each file we are joining on. Make sure there is no space after the comma. Then we give it the two file names, in the same order as the column names. We then redirect the output to a file called "joined.csv".
 
 Peak at the columns names:
 
@@ -472,7 +474,7 @@ What can we learn from this?
 
 Let's find out that top seller. [csvsort](http://csvkit.readthedocs.io/en/1.0.2/tutorial/2_examining_the_data.html#csvsort-order-matters) will sort your output to screen or redirect into another file, but it does not change the sort order of the original file.
 
-Let's type in all in and run it, then break it down:
+Let's type in all in (or copy/paste) and run it, then break it down:
 
 `$ csvsort -c Total_Receipts -r mixbev.csv | csvcut -c Location_Name,Location_Address,county,Total_Receipts | head | csvlook --max-column-width 20`
 
@@ -646,4 +648,4 @@ At NICAR, the computers are set up for you. To run Python on your own computer, 
 
 ## Running Python in a browser
 
-We didn't get into here, but I like using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) to run Python projects. There is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter, which lets you run csvkit as if it were on the command line, but you don't have to do it one line at a time. That code is from 2017, so your milage may vary.
+We didn't get into here, but I like using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) to run Python projects. There is a [bash kernel](http://slhogle.github.io/2017/bash_jupyter_notebook/) for Jupyter, which lets you run csvkit as if it were on the command line, but you don't have to do it one line at a time. That code is from 2017, so your mileage may vary.
