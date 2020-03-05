@@ -84,21 +84,19 @@ But, wait; there's more: Continue by adding `hands_` to the end and then tab:
 
 Which will fill out `hands_on_classes/`. And finally add `csvkit` and hit tab.
 
-`$ cd ~/Desktop/hands_on_classes/csvkit_a_command_line_tool_for_reporters_1160`
-
-> The path above will be a little different as the class name and ID are updated for 2020.
+`$ cd ~/Desktop/hands_on_classes/using_csvkit_to_wrangle_data_without_excel_2083`
 
 Then hit return.
 
 What we've done is "change directory" to go inside this folder in your terminal. This is where we'll work for remainder of the class.
 
-This is the command-line version of going to your Desktop, double-clicking on the "hands_on_classes" folder, then again on the "csvkit_a_command_line_tool_for_reporters_1160" folder.
+This is the command-line version of going to your Desktop, double-clicking on the "hands_on_classes" folder, then again on the "using_csvkit_to_wrangle_data_without_excel_2083" folder.
 
 Now, let's make sure you really are where you should be. Use the `$ pwd` command and you should get are return similar to this:
 
 ```
 $ pwd
-/Users/Username/Desktop/hands_on_classes/csvkit_a_command_line_tool_for_reporters_1160/
+/Users/Username/Desktop/hands_on_classes/using_csvkit_to_wrangle_data_without_excel_2083/
 ```
 
 ### ls - list
