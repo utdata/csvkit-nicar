@@ -8,7 +8,7 @@ This session is good for: People who want a solution for working with multipleâ€
 
 Originally created by [Christian McDonald](http://github.com/critmcdonald) for the [2018 CAR Conference](https://www.ire.org/conferences/nicar18/) in Chicago and updated for [2020 CAR Conference](https://www.ire.org/events-and-training/conferences/nicar-2020) in New Orleans.
 
-This lecture assumes use of Macintosh with [csvkit](https://csvkit.rtfd.org) installed globally using Python 3.8, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md) or a python environment of your choice. Or follow the [csvkit instructions to install globally](https://csvkit.readthedocs.io/en/1.0.3/tutorial/1_getting_started.html#installing-csvkit).
+This lecture assumes use of Macintosh with [csvkit](https://csvkit.readthedocs.io/) installed globally using Python 3.8, which is how the NICAR machines are set up. If you are seeing this at another time, you might [install miniconda](https://github.com/utdata/csvkit-nicar2018/blob/master/install_miniconda.md) or a python environment of your choice. Or follow the [csvkit instructions to install globally](https://csvkit.readthedocs.io/en/1.0.3/tutorial/1_getting_started.html#installing-csvkit).
 
 In addition, if you are not on a NICAR machine, you will need the data. I recommend you download this repo, which will give you these directions as well as all the data. You will have to adjust directory path names from the instructions below since you folder structure won't the the same.
 
@@ -181,7 +181,7 @@ This is all the bash/terminal basics we'll cover, because csvkit is our focus. I
 
 ## csvkit
 
-Now we'll concentrate the power of csvkit. If you want more information on any of the commands or flags we use, read the documentation at <https://csvkit.readthedocs.io.>
+Now we'll concentrate the power of csvkit. If you want more information on any of the commands or flags we use, read the documentation at <https://csvkit.readthedocs.io>
 
 ### csvcut -n
 
@@ -328,7 +328,7 @@ gives you this:
 
 We passed the "-n 15" argument into "head" to change the number of lines to 15, so we could see the value for Bastrop, whose code is 11. I happen to know this matches our "11.csv" filename, so we are on the right track.
 
-If we need to talk more about what a "join" is here, we can. If not, we'll move on.
+If we need to [talk more about what a "join" is here](images/join.png), we can. If not, we'll move on.
 
 Now we know that "Location_County" in "stacked.csv" matches "code" in the "counties.csv". Now we can use [csvjoin](http://csvkit.readthedocs.io/en/1.0.2/tutorial/3_power_tools.html#csvjoin-merging-related-data):
 
